@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dizitise | Futuristic Digital Institute</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --neon:#00f5ff;
+  --purple:#b026ff;
+  --bg1:#060e49;
+  --bg2:#050509;
+  --glass:rgba(255,255,255,.08);
+}
+/* Page Fade In */
+body{
+  opacity: 0;
+  animation: pageFade 1.6s ease-out forwards;
+}
+
+@keyframes pageFade{
+  from{
+    opacity:0;
+    filter: blur(12px);
+    transform: scale(1.02);
+  }
+  to{
+    opacity:1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+section{
+  opacity:0;
+  transform: translateY(40px);
+  transition: all 1s cubic-bezier(.22,1,.36,1);
+}
+
+section.show{
+  opacity:1;
+  transform:none;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{
+  background:
+    radial-gradient(900px 500px at 10% 10%, rgba(0,245,255,.18), transparent 60%),
+    radial-gradient(900px 500px at 90% 20%, rgba(176,38,255,.18), transparent 60%),
+    linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:#fff;
+  overflow-x:hidden;
+}
+
+section{padding:110px 8%;}
+.grid{display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+.title{text-align:center;margin-bottom:60px;}
+.title h3{font-size:40px;text-shadow:0 0 20px var(--neon);}
+
+/* Cursor */
+
+
+/* Header */
+header{
+  position:fixed;top:0;width:100%;z-index:1000;
+  overflow-y: hidden;
+  padding:18px 8%;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(75, 25, 167, 0.55);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+header h1{color:var(--neon);text-shadow:0 0 15px var(--neon);}
+nav a{margin-left:25px;opacity:.85;text-decoration:none;color:white;}
+nav a:hover{color:var(--neon);}
+
+/* Hero */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:60px;
+}
+.hero-left h2{
+  font-size:clamp(36px,5vw,60px);
+  line-height:1.1;
+  text-shadow:0 0 25px var(--neon);
+}
+.hero-left span{color:var(--neon);}
+.hero-left p{margin:25px 0;color:#cfd3ff;max-width:520px;}
+.hero-actions{display:flex;gap:18px;flex-wrap:wrap;}
+
+.cta{
+  padding:14px 36px;border-radius:40px;font-weight:600;
+  background:linear-gradient(135deg,var(--neon),var(--purple));
+  box-shadow:0 0 25px rgba(0,245,255,.6);
+  color:black;
+}
+.cta.secondary{
+  background:rgba(255,255,255,.08);
+  border:1px solid var(--neon);
+  color:white;
+}
+
+/* Cards */
+.card{
+  padding:28px;
+  border-radius:22px;
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 0 25px rgba(0,245,255,.3);
+  transition:.4s;
+  animation:fadeUp .8s ease forwards;
+}
+.card:hover{transform:translateY(-12px) scale(1.03);}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(50px)}
+  to{opacity:1;transform:none}
+}
+
+/* Buttons */
+.btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 22px;
+  border-radius:25px;
+  background:linear-gradient(135deg,var(--neon),var(--purple));
+  color:black;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* ================= GOD LEVEL MODAL ================= */
+
+/* Background Overlay */
+.modal-bg{
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(17, 0, 255, 0.15), transparent 40%),
+    radial-gradient(circle at bottom, rgba(200, 154, 226, 0.15), transparent 30%),
+    rgba(0,0,0,.75);
+  backdrop-filter: blur(16px) saturate(160%);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  animation: modalFadeIn .4s ease forwards;
+}
+
+/* Fade animation */
+@keyframes modalFadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+/* Modal Box */
+.modal{
+  position: relative;
+  background:
+    linear-gradient(145deg, rgba(0, 28, 241, 0.98), rgba(10, 10, 78, 0.98));
+  padding: 38px;
+  border-radius: 26px;
+  max-width: 560px;
+  width: 92%;
+  color: #fff;
+  box-shadow:
+    0 0 25px rgba(0,245,255,.5),
+    0 0 60px rgba(176,38,255,.25),
+    inset 0 0 20px rgba(255,255,255,.05);
+  transform: scale(.7) translateY(40px);
+  opacity: 0;
+  animation: modalPop .45s cubic-bezier(.2,.8,.2,1) forwards;
+  overflow: hidden;
+}
+
+/* Pop animation */
+@keyframes modalPop{
+  to{
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Neon Border Glow */
+.modal::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:26px;
+  background: linear-gradient(135deg, var(--neon), var(--purple), var(--neon));
+  filter: blur(14px);
+  opacity:.8;
+  z-index:-1;
+}
+
+/* Glass reflection layer */
+.modal::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:26px;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,.12),
+    transparent 40%,
+    transparent 60%,
+    rgba(255,255,255,.08)
+  );
+  opacity:.35;
+  pointer-events:none;
+}
+
+/* Header */
+.modal h3{
+  color: white;
+  font-size: 45px;
+  text-shadow: 
+    0 0 10px var(--neon),
+    0 0 20px rgba(0,245,255,.7);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* Paragraph */
+.modal p{
+  border-radius: 12px;
+  padding: 20px;
+  line-height: 1.6;
+  opacity: .9;
+  text-align: left;
+  border: solid 2px white;
+}
+.modal h4{
+  line-height: 1.6;
+  opacity: .9;
+  text-align: left;
+  font-size: larger;
+}
+
+/* Button */
+.modal button{
+  margin-top: 26px;
+  padding: 12px 34px;
+  border: none;
+  border-radius: 40px;
+  background: radial-gradient(neon-blue);
+  color: #000;
+  font-weight: 800;
+  letter-spacing: .4px;
+  cursor: pointer;
+  transition: .3s ease;
+  box-shadow:
+    0 0 12px rgba(0,245,255,.6),
+    0 0 30px rgba(176,38,255,.4);
+}
+
+/* Button hover */
+.modal button:hover{
+  transform: scale(1.08);
+  box-shadow:
+    0 0 25px rgba(0,245,255,1),
+    0 0 60px rgba(176,38,255,.8);
+}
+
+/* Button active */
+.modal button:active{
+  transform: scale(.95);
+}
+
+/* Optional: Smooth glow breathing effect */
+.modal{
+  animation: modalPop .45s cubic-bezier(.2,.8,.2,1) forwards,
+             glowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse{
+  from{
+    box-shadow:
+      0 0 20px rgba(0,245,255,.4),
+      0 0 50px rgba(176,38,255,.2);
+  }
+  to{
+    box-shadow:
+      0 0 40px rgba(0,245,255,.8),
+      0 0 90px rgba(176,38,255,.6);
+  }
+}
+
+
+/* Stats */
+.stat h2{
+  font-size:48px;
+  color:var(--neon);
+  text-shadow:0 0 15px var(--neon);
+}
+
+/* Profile */
+.profile{text-align:center;}
+.profile img{
+  width:80px;height:80px;border-radius:50%;
+  border:2px solid var(--neon);
+  box-shadow:0 0 15px var(--neon);
+  margin-bottom:10px;
+}
+.stars{color:gold;margin-top:5px;}
+
+/* Testimonials */
+.testimonial{display:flex;gap:15px;}
+.testimonial img{
+  width:50px;height:50px;border-radius:50%;
+  border:2px solid var(--purple);
+}
+
+/* Map */
+.map-box{
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 0 40px rgba(0,245,255,.4);
+}
+
+/* Contact */
+.contact-form{display:grid;gap:15px;}
+.contact-form input,
+.contact-form textarea{
+  padding:14px;border-radius:10px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2);
+  color:#fff;
+}
+.contact-form button{
+  padding:14px;border:none;border-radius:30px;
+  background:linear-gradient(135deg,var(--neon),var(--purple));
+  color:black;font-weight:700;
+}
+.hero-right{
+  position:relative;
+  height:380px;
+  
+}
+
+/* Random positions */
+.card-one{
+  position:absolute;
+  top:20px;
+  left:40px;
+   background:linear-gradient(135deg,var(--neon),var(--purple));
+   font-size: larger;
+}
+.card-two{
+  position:absolute;
+  top:140px;
+  left:180px;
+   background:linear-gradient(135deg,var(--neon),var(--purple));
+   font-size: larger;
+}
+.card-three{
+  position:absolute;
+  top:260px;
+  left:80px;
+   background:linear-gradient(135deg,var(--neon),var(--purple));
+   font-size: larger;
+}
+
+/* Floating animation */
+.float-card{
+  animation:float 6s ease-in-out infinite alternate;
+}
+
+.card-two{ animation-duration:8s; }
+.card-three{ animation-duration:10s; }
+
+@keyframes float{
+  from{ transform:translateY(0px); }
+  to{ transform:translateY(-25px); }
+}
+@keyframes float{
+  0%   { transform:translate(0, 0); }
+  50%  { transform:translate(6px, -20px); }
+  100% { transform:translate(-6px, -40px); }
+}
+
+
+/* WhatsApp */
+.whatsapp{
+  position:fixed;bottom:25px;right:25px;
+  width:55px;height:55px;border-radius:50%;
+  background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-size:26px;
+  box-shadow:0 0 20px #25D366;
+  z-index:9999;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;}
+  nav{display:none;}
+  section{padding:90px 6%;}
+}
+/* HERO GLIDE IN */
+.glide-left{
+  opacity:0;
+  transform:translateX(-80px);
+  animation:slideInLeft 1.4s ease forwards;
+}
+.glide-right{
+  opacity:0;
+  transform:translateX(80px);
+  animation:slideInRight 1.4s ease forwards;
+  animation-delay:.3s;
+}
+
+@keyframes slideInLeft{
+  to{opacity:1;transform:translateX(0)}
+}
+@keyframes slideInRight{
+  to{opacity:1;transform:translateX(0)}
+}
+
+/* FLOATING CARDS */
+.float-card{
+  animation:float 6s ease-in-out infinite alternate;
+}
+.float-card:nth-child(2){animation-duration:8s}
+.float-card:nth-child(3){animation-duration:10s}
+
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(-20px)}
+}
+/* ================= MOBILE OPTIMIZATION ================= */
+@media (max-width: 768px){
+
+  /* Remove custom cursor on mobile */
+  .cursor{
+    display:none;
+  }
+
+  /* Disable heavy parallax movement */
+  .hero{
+    transform:none !important;
+  }
+
+  /* Hero layout */
+  .hero{
+    padding-top:120px;
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+
+  .hero-left h2{
+    font-size:32px;
+    text-align:center;
+  }
+
+  .hero-left p{
+    text-align:center;
+    font-size:14px;
+  }
+
+  .hero-actions{
+    justify-content:center;
+  }
+
+  /* Floating cards simplified */
+  .hero-right{
+    height:auto;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .card-one,
+  .card-two,
+  .card-three{
+    position:relative;
+    top:auto;
+    left:auto;
+  }
+
+  .float-card{
+    animation:none;
+  }
+
+  /* Reduce glass effect for performance */
+  .card{
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 15px rgba(0,245,255,.2);
+  }
+
+  /* Reduce section spacing */
+  section{
+    padding:70px 6%;
+  }
+
+  .title h3{
+    font-size:28px;
+  }
+
+  /* Stats smaller */
+  .stat h2{
+    font-size:34px;
+  }
+
+  /* Modal better fit */
+  .modal{
+    padding:25px;
+    max-width:90%;
+  }
+
+ /* Make sure nothing blocks fixed elements */
+body{
+  overflow-x:hidden;
+  overflow-y:auto;
+  position:relative;
+}
+
+/* FLOATING ACTION BUTTONS */
+.floating-actions{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  z-index:9999999;
+}
+
+/* Common Button */
+.fab{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  color:#fff;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.3s ease;
+  animation:fabFloat 4s ease-in-out infinite;
+}
+
+/* WhatsApp */
+.fab.whatsapp{
+  background:#25D366;
+  box-shadow:0 0 12px #25D366, 0 0 35px rgba(37,211,102,.7);
+}
+
+/* Call */
+.fab.call{
+  background:linear-gradient(135deg,#00f5ff,#0099ff);
+  box-shadow:0 0 12px #00f5ff, 0 0 35px rgba(0,245,255,.7);
+}
+
+/* Instagram */
+.fab.instagram{
+  background:linear-gradient(45deg,#fd1d1d,#833ab4,#fcb045);
+  box-shadow:0 0 12px rgba(253,29,29,.7), 0 0 35px rgba(131,58,180,.7);
+}
+
+/* Hover */
+.fab:hover{
+  transform:scale(1.15);
+}
+
+/* Floating animation */
+@keyframes fabFloat{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+  100%{transform:translateY(0);}
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .fab{
+    width:48px;
+    height:48px;
+    font-size:20px;
+  }
+}
+
+
+/* Mobile */
+@media(max-width:768px){
+  .fab{
+    width:48px;
+    height:48px;
+    font-size:20px;
+  }
+}
+
+  /* Testimonials stack nicely */
+  .testimonial{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  /* Map height smaller */
+  .map-box iframe{
+    height:280px;
+  }
+
+  /* Navbar hidden already – perfect */
+}
+/* COURSES - GOD LEVEL DESIGN */
+.courses-grid{
+  perspective:1000px;
+}
+
+.course-card{
+  position:relative;
+  border-radius:26px;
+  padding:2px;
+  overflow:hidden;
+  transform-style:preserve-3d;
+  transition:.5s cubic-bezier(.2,.8,.2,1);
+}
+
+.course-card:hover{
+  transform:rotateX(6deg) rotateY(-6deg) scale(1.03);
+  box-shadow: inset 0 0 40px rgba(255,255,255,.1),0 0 40px rgba(0,245,255,.4);
+}
+
+.course-content{
+  position:relative;
+  padding:28px;
+  border-radius:24px;
+  background:rgba(10,15,40,.75);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.15);
+  z-index:2;
+}
+
+.course-glow{
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle,var(--neon),transparent 60%);
+  opacity:.35;
+  filter:blur(60px);
+  z-index:1;
+}
+
+/* Unique glow colors */
+.neon-blue .course-glow{ background:radial-gradient(circle,#00f5ff,transparent 65%); }
+.neon-purple .course-glow{ background:radial-gradient(circle,#b026ff,transparent 65%); }
+.neon-cyan .course-glow{ background:radial-gradient(circle,#00ffd5,transparent 65%); }
+.neon-ai .course-glow{ background:radial-gradient(circle,#7cff00,transparent 65%); }
+
+.course-icon{
+  font-size:38px;
+  display:inline-block;
+  margin-bottom:10px;
+  text-shadow:0 0 20px var(--neon);
+}
+
+.course-content h3{
+  color:var(--neon);
+  margin-bottom:6px;
+}
+
+.course-content p{
+  opacity:.85;
+  margin-bottom:10px;
+}
+
+.course-content ul{
+  list-style:none;
+  padding-left:0;
+  margin:10px 0 16px;
+}
+
+.course-content ul li{
+  font-size:14px;
+  opacity:.85;
+  position:relative;
+  padding-left:18px;
+}
+
+.course-content ul li::before{
+  content:"✦";
+  position:absolute;
+  left:0;
+  color:var(--neon);
+}
+
+.course-card .btn{
+  width:100%;
+  text-align:center;
+}
+
+/* Subtle floating */
+.course-card{
+  animation:courseFloat 6s ease-in-out infinite alternate;
+}
+.course-card:nth-child(2){animation-duration:7.5s;}
+.course-card:nth-child(3){animation-duration:9s;}
+.course-card:nth-child(4){animation-duration:10.5s;}
+
+@keyframes courseFloat{
+  from{ transform:translateY(0px); }
+  to{ transform:translateY(-14px); }
+}
+/* === HOLOGRAPHIC ORBIT STATS === */
+
+.stats-orbit{
+  display:flex;
+  justify-content:center;
+  gap:140px;
+  flex-wrap:wrap;
+  margin-top:90px;
+}
+
+.orb-stat{
+  position:relative;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation:orbFloat 6s ease-in-out infinite alternate;
+}
+
+.orb-stat:nth-child(2){animation-duration:7.5s;}
+.orb-stat:nth-child(3){animation-duration:9s;}
+.orb-stat:nth-child(4){animation-duration:10.5s;}
+
+@keyframes orbFloat{
+  from{transform:translateY(0);}
+  to{transform:translateY(-18px);}
+}
+
+/* Core Glass Orb */
+.orb-content{
+  position:absolute;
+  width: 300px;;
+  height: 300px;;
+  border-radius:50%;
+  background: radial-gradient(
+    circle at top left,
+    rgba(80,140,255,0.9),
+    rgba(54, 17, 138, 0.95),
+    rgba(17, 34, 128, 0.98)
+  );
+  backdrop-filter: blur(12px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:2;
+  box-shadow:
+    0 0 25px rgba(72, 86, 150, 0.6),
+    0 0 60px rgba(4, 13, 71, 0.4),
+    inset 0 0 25px rgba(255,255,255,0.15);
+}
+
+
+.orb-content span{
+  font-size:22px;
+}
+.orb-content h2{
+  color:var(--neon);
+  font-size:90px;
+}
+.orb-content p{
+  font-size:25px;
+  opacity:.8;
+  font-weight: bold;
+}
+
+/* Neon ring */
+.orb-stat svg{
+  position:absolute;
+  width:180px;
+  height:180px;
+  transform:rotate(-90deg);
+}
+.orb-stat circle{
+  fill:none;
+  stroke:var(--neon);
+  stroke-width:3;
+  stroke-dasharray:327;
+  stroke-dashoffset:327;
+  filter:drop-shadow(0 0 8px var(--neon));
+  transition:1s;
+}
+.quick-actions{
+    margin-top:20px;
+    display:flex;
+    gap:15px;
+     display:inline-block;
+  margin-top:12px;
+  padding:10px 22px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#00f5ff,#b026ff);
+  color:black;
+  font-weight:700;
+   
+}
+/* Colors */
+.orb-stat.purple circle{stroke:#b026ff;}
+.orb-stat.cyan circle{stroke:#00ffd5;}
+.orb-stat.green circle{stroke:#7cff00;}
+#typing-word{
+  color: var(--neon);
+  position: relative;
+}
+
+#typing-word::after{
+  content: "|";
+  margin-left:4px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink{
+  0%,50%,100%{opacity:1;}
+  25%,75%{opacity:0;}
+}
+/* ===== GOD LEVEL MENTOR CARDS ===== */
+
+/* ===== MENTOR GOD LEVEL UI ===== */
+
+.mentors-grid{
+  perspective:1200px;
+}
+
+.mentor-card{
+  position:relative;
+  border-radius:28px;
+  padding:2px;
+  overflow:hidden;
+  cursor:pointer;
+  transform-style:preserve-3d;
+  transition:.4s cubic-bezier(.2,.8,.2,1);
+  animation:mentorFloat 8s ease-in-out infinite alternate;
+}
+
+.mentor-card:nth-child(2){animation-duration:10s;}
+.mentor-card:nth-child(3){animation-duration:12s;}
+
+@keyframes mentorFloat{
+  from{transform:translateY(0);}
+  to{transform:translateY(-20px);}
+}
+
+.mentor-card:hover{
+  box-shadow:
+    0 0 40px rgba(0,245,255,.6),
+    0 0 80px rgba(176,38,255,.4);
+}
+
+/* Hologram scan line */
+.mentor-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(0,245,255,.35),
+    transparent 70%
+  );
+  opacity:0;
+  transform:translateX(-120%);
+  transition:.7s ease;
+  pointer-events:none;
+}
+.mentor-card:hover::after{
+  opacity:1;
+  transform:translateX(120%);
+}
+.mentor-card{
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  will-change: transform;
+}
+
+.mentor-card:hover{
+  box-shadow:
+    0 25px 50px rgba(0,245,255,0.5),
+    0 0 80px rgba(176,38,255,0.4);
+}
+
+/* Disable on mobile */
+@media(max-width:768px){
+  .mentor-card{
+    transform: none !important;
+  }
+}
+
+
+/* Glow background */
+.mentor-glow{
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle,#00f5ff,transparent 65%);
+  opacity:.35;
+  filter:blur(80px);
+  z-index:1;
+}
+.mentor-glow.purple{
+  background:radial-gradient(circle,#b026ff,transparent 65%);
+}
+.mentor-glow.green{
+  background:radial-gradient(circle,#7cff00,transparent 65%);
+}
+
+/* Content */
+.mentor-content{
+  position:relative;
+  z-index:2;
+  padding:32px;
+  border-radius:26px;
+  background:rgba(10,15,40,.85);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.15);
+  text-align:center;
+}
+
+/* Image */
+.mentor-content img{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  border:2px solid var(--neon);
+  box-shadow:0 0 20px var(--neon);
+  margin-bottom:12px;
+}
+
+/* Name */
+.mentor-content h4{
+  color:var(--neon);
+  font-size:20px;
+}
+.mentor-content p{
+  opacity:.8;
+}
+
+/* Chips */
+.chips{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin:10px 0;
+}
+.chips span{
+  font-size:11px;
+  padding:4px 10px;
+  border-radius:20px;
+  background:rgba(0,245,255,.15);
+  border:1px solid rgba(0,245,255,.4);
+}
+
+/* Stars */
+.stars{
+  color:gold;
+  margin:6px 0;
+}
+
+/* Button */
+.btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 22px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#00f5ff,#b026ff);
+  color:black;
+  font-weight:700;
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .mentor-card{
+    animation:none;
+  }
+}
+/* REVIEWS HORIZONTAL SCROLL */
+.reviews-wrapper{
+  width:100%;
+  overflow:hidden;
+  position:relative;
+  padding:20px 0;
+}
+
+.reviews-track{
+  display:flex;
+  gap:30px;
+  width:max-content;
+  animation:scrollReviews 35s linear infinite;
+}
+
+
+
+@keyframes scrollReviews{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-50%);
+  }
+}
+
+/* Make cards look premium in slider */
+.testimonial{
+  min-width:320px;
+  max-width:360px;
+  display:flex;
+  gap:15px;
+  align-items:flex-start;
+  background:rgba(10,15,40,.75);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(0,245,255,.3);
+  box-shadow:
+    0 0 5px rgba(0,245,255,.25),
+    inset 0 0 15px rgba(176,38,255,.2);
+  transition:.4s;
+}
+
+.testimonial:hover{
+  transform:scale(1.05);
+  box-shadow:
+    0 0 25px rgba(0,245,255,.5),
+    inset 0 0 25px rgba(176,38,255,.3);
+}
+
+.testimonial img{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  border:2px solid var(--neon);
+  box-shadow:0 0 12px var(--neon);
+}
+/* REVIEWS HORIZONTAL SCROLL */
+.reviews-wrapper{
+  width:100%;
+  overflow:hidden;
+  position:relative;
+  padding:30px 0;
+
+  /* Soft fade on edges */
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+}
+
+.reviews-track{
+  display:flex;
+  gap:30px;
+  width:max-content;
+  animation:scrollReviews 40s linear infinite;
+}
+
+/* Remove pause on hover */
+/*
+.reviews-wrapper:hover .reviews-track{
+  animation-play-state: paused;
+}
+*/
+
+@keyframes scrollReviews{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-50%);
+  }
+}
+
+/* Review card premium look */
+.testimonial{
+  min-width:320px;
+  max-width:360px;
+  display:flex;
+  gap:15px;
+  align-items:flex-start;
+  background:rgba(10,15,40,.75);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(0,245,255,.25);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:
+    0 0 25px rgba(0,245,255,.25),
+    inset 0 0 15px rgba(176,38,255,.2);
+  transition:.4s ease;
+}
+
+.testimonial:hover{
+  transform:translateY(-6px) scale(1.04);
+  box-shadow:
+    0 0 10px rgba(0,245,255,.6),
+    inset 0 0 25px rgba(176,38,255,.4);
+}
+
+.testimonial img{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  border:2px solid var(--neon);
+  box-shadow:0 0 12px var(--neon);
+}
+
+.contact-section{
+  padding:120px 8%;
+  position:relative;
+}
+
+.contact-sub{
+  text-align:center;
+  opacity:.7;
+  margin-top:8px;
+}
+
+.contact-wrapper{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:50px;
+  margin-top:60px;
+}
+
+/* INFO PANEL */
+.contact-info{
+  background:rgba(10,15,40,.7);
+  backdrop-filter:blur(16px);
+  padding:35px;
+  border-radius:26px;
+  border:1px solid rgba(0,245,255,.25);
+  box-shadow:0 0 35px rgba(0,245,255,.35);
+}
+
+.contact-info h2{
+  color:var(--neon);
+  margin-top:15px;
+}
+
+.contact-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:25px;
+}
+
+.contact-badges span{
+  padding:6px 14px;
+  border-radius:20px;
+  background:linear-gradient(135deg,var(--neon),var(--purple));
+  color:black;
+  font-weight:700;
+  font-size:12px;
+}
+
+/* FORM PANEL */
+.contact-form-box{
+  background:rgba(10,15,40,.85);
+  backdrop-filter:blur(18px);
+  padding:40px;
+  border-radius:28px;
+  border:1px solid rgba(176,38,255,.35);
+  box-shadow:0 0 50px rgba(176,38,255,.45);
+  position:relative;
+}
+
+.contact-form-box h2{
+  color:var(--neon);
+  margin-bottom:20px;
+}
+
+/* FLOATING INPUTS */
+.input-group{
+  position:relative;
+  margin-bottom:22px;
+}
+
+.input-group input,
+.input-group textarea{
+  width:100%;
+  padding:14px 12px;
+  background:transparent;
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:10px;
+  color:white;
+  outline:none;
+  font-size:14px;
+}
+
+.input-group label{
+  position:absolute;
+  top:50%;
+  left:12px;
+  transform:translateY(-50%);
+  font-size:13px;
+  opacity:.6;
+  pointer-events:none;
+  transition:.3s ease;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label,
+.input-group textarea:focus + label,
+.input-group textarea:valid + label{
+  top:-8px;
+  font-size:11px;
+  color:var(--neon);
+  background:#050509;
+  padding:0 6px;
+  border-radius:6px;
+  opacity:1;
+}
+
+/* SEND BUTTON */
+.send-btn{
+  position:relative;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:40px;
+  font-weight:800;
+  font-size:25px;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--neon),var(--purple));
+  color:rgb(241, 245, 253);
+  overflow:hidden;
+}
+
+.send-btn:hover{
+  box-shadow:0 0 20px rgba(0,245,255,.8);
+  transform:scale(1.03);
+}
+
+
+
+@keyframes btnPulse{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+/* SUCCESS MESSAGE */
+.success-message{
+  display:none;
+  margin-top:20px;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(0)}
+
+body{
+  transform: none !important;
+}
+
+</style>
+</head>
+<body>
+
+
+
+
+<div class="cursor"></div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<header>
+  <h1>Dizitise</h1>
+  <nav>
+    <a href="#courses">Courses</a>
+    <a href="#mentors">Mentors</a>
+    <a href="#stats">Stats</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-left glide-left">
+      <h2>
+  India’s <span id="typing-word"></span><br>
+  Futuristic Digital Institute
+</h2>
+
+      <p>Master Video Editing, Graphic Design, Web Development & AI with real mentors.</p>
+      <div class="hero-actions">
+        <a class="cta">Join Now</a>
+        <a class="cta secondary">Visit Campus</a>
+      </div>
+    </div>
+
+   <div class="hero-right">
+  <div class="card float-card card-one">
+    🏫 Premium Offline Campus
+  </div>
+
+  <div class="card float-card card-two">
+    🤖 Earn 70k/month
+  </div>
+
+  <div class="card float-card card-three">
+    🚀 Full Freelancing Focus
+  </div>
+</div>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="title">
+    <h3>Our Power Levels</h3>
+    <p style="opacity:.7">Live performance indicators of Dizitise</p>
+  </div>
+
+  <div class="stats-orbit">
+
+    <div class="orb-stat" data-target="500">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="52" />
+      </svg>
+      <div class="orb-content">
+        <span></span>
+        <h2>70+</h2>
+        <p>Students</p>
+      </div>
+    </div>
+
+    <div class="orb-stat purple" data-target="95">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="52" />
+      </svg>
+      <div class="orb-content">
+        <span>🔥</span>
+        <h2>95%</h2>
+        <p>Success</p>
+      </div>
+    </div>
+
+    <div class="orb-stat cyan" data-target="100">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="52" />
+      </svg>
+      <div class="orb-content">
+        <span></span>
+        <h2>150+</h2>
+        <p>Projects</p>
+      </div>
+    </div>
+
+    <div class="orb-stat green" data-target="4">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="52" />
+      </svg>
+      <div class="orb-content">
+        <span></span>
+        <h2>4+</h2>
+        <p>Core Skills</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="title"><h3>Our Courses</h3></div>
+
+  <div class="grid courses-grid">
+
+    <div class="course-card neon-blue">
+      <div class="course-glow"></div>
+      <div class="course-content">
+        <span class="course-icon">🎬</span>
+        <h3>Video Editing</h3>
+        <p>Reels • YouTube • Cinematic Films • Freelancing</p>
+        <ul>
+          <li>Premiere Pro + After Effects</li>
+          <li>Client Handling</li>
+          <li>Portfolio Building</li>
+        </ul>
+        <button class="btn" onclick="openModal('Video Editing','Master cinematic editing, YouTube workflows, client projects, monetization, freelancing & portfolio building.')">
+          Explore Program →
+        </button>
+      </div>
+    </div>
+
+    <div class="course-card neon-purple">
+      <div class="course-glow"></div>
+      <div class="course-content">
+        <span class="course-icon">🎨</span>
+        <h3>Graphic Design</h3>
+        <p>Branding • UI • Social Media • Thumbnails</p>
+        <ul>
+          <li>Photoshop + Illustrator</li>
+          <li>Brand Identity Design</li>
+          <li>Real Client Projects</li>
+        </ul>
+        <button class="btn" onclick="openModal('Graphic Design','Learn branding, UI design, social media creatives, client projects & portfolio development.')">
+          Explore Program →
+        </button>
+      </div>
+    </div>
+
+    <div class="course-card neon-cyan">
+      <div class="course-glow"></div>
+      <div class="course-content">
+        <span class="course-icon">💻</span>
+        <h3>Web Development</h3>
+        <p>Frontend • Hosting • Live Projects • Freelancing</p>
+        <ul>
+          <li>HTML, CSS, JavaScript</li>
+          <li>Deploy Real Websites</li>
+          <li>Freelancing & Agency Skills</li>
+        </ul>
+        <button class="btn" onclick="openModal('Web Development','Frontend development, live hosting, freelancing, agency workflows & client projects.')">
+          Explore Program →
+        </button>
+      </div>
+    </div>
+
+    <div class="course-card neon-ai">
+      <div class="course-glow"></div>
+      <div class="course-content">
+        <span class="course-icon">🤖</span>
+        <h3>Artificial Intelligence</h3>
+        <p>Automation • ChatGPT • Productivity Systems</p>
+        <ul>
+          <li>AI Workflows</li>
+          <li>Automation Tools</li>
+          <li>Future-Proof Skills</li>
+        </ul>
+        <button class="btn" onclick="openModal('Artificial Intelligence','Learn ChatGPT, automation tools, AI workflows & future business systems.')">
+          Explore Program →
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- MENTORS -->
+<!-- ================= MENTORS SECTION ================= -->
+<section id="mentors">
+  <div class="title"><h3>Our Mentors</h3></div>
+
+  <div class="grid mentors-grid">
+
+    <!-- Mentor 1 -->
+    <div class="mentor-card"
+      onclick="openModal(
+        'Jivesh Dahiya',
+        '10+ years of creative leadership. Built multiple agencies. Mentored 500+ designers and branding professionals.',
+        'https://i.pravatar.cc/400?1',
+        'Creative Director',
+        ['Branding','UI/UX','Agencies','Leadership','Design Thinking']
+      )">
+      <div class="mentor-glow"></div>
+      <div class="mentor-content">
+        <img src="https://i.pravatar.cc/200?1">
+        <h4>Jivesh Dahiya</h4>
+        <p>Creative Director</p>
+        <div class="chips">
+          <span>Video Editing</span>
+          <span>Web Design</span>
+          <span>Graphic Design</span>
+        </div>
+        <div class="stars">★★★★★</div>
+        <div class="btn">View Profile</div>
+      </div>
+    </div>
+
+    <!-- Mentor 2 -->
+    <div class="mentor-card"
+      onclick="openModal(
+        'Pankaj Pratap',
+        'Full-stack engineer. Built 20+ SaaS products. Startup technical consultant and mentor for developers.',
+        'https://i.pravatar.cc/400?2',
+        'Lead Developer',
+        ['Full-Stack','SaaS','System Design','Startups','Mentorship']
+      )">
+      <div class="mentor-glow purple"></div>
+      <div class="mentor-content">
+        <img src="https://i.pravatar.cc/200?2">
+        <h4>Pankaj Pratap</h4>
+        <p>Lead Developer</p>
+        <div class="chips">
+          <span>Full-Stack</span>
+          <span>SaaS</span>
+          <span>Startups</span>
+        </div>
+        <div class="stars">★★★★★</div>
+        <div class="btn">View Profile</div>
+      </div>
+    </div>
+
+    <!-- Mentor 3 -->
+    <div class="mentor-card"
+      onclick="openModal(
+        'Mehar Malik',
+        'AI automation expert. ChatGPT workflows specialist. Helps businesses scale using AI systems.',
+        'https://i.pravatar.cc/400?3',
+        'AI Mentor',
+        ['AI Automation','ChatGPT','Productivity','Workflow Systems','Business AI']
+      )">
+      <div class="mentor-glow green"></div>
+      <div class="mentor-content">
+        <img src="https://i.pravatar.cc/200?3">
+        <h4>Mehar Malik</h4>
+        <p>AI Mentor</p>
+        <div class="chips">
+          <span>AI</span>
+          <span>Automation</span>
+          <span>Business</span>
+        </div>
+        <div class="stars">★★★★☆</div>
+        <div class="btn">View Profile</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= FUTURISTIC PROFILE MODAL ================= -->
+<div class="modal-bg" id="modalBg">
+  <div class="profile-modal">
+
+    <div class="modal-left">
+      <img id="modalImg" src="">
+      <div class="modal-badge">MENTOR PROFILE</div>
+    </div>
+
+    <div class="modal-right">
+      <h2 id="modalName"></h2>
+      <h4 id="modalRole"></h4>
+      <div class="modal-stars">★★★★★</div>
+
+      <div class="modal-bio" id="modalBio"></div>
+
+      <div class="modal-skills" id="modalSkills"></div>
+
+      <button class="modal-close" onclick="closeModal()">Close Profile</button>
+    </div>
+
+  </div>
+</div>
+
+<section id="reviews">
+  <div class="title">
+    <h3>What Our Students Say</h3>
+  </div>
+
+  <div class="reviews-wrapper">
+    <div class="reviews-track">
+
+      <!-- Review 1 -->
+      <div class="card testimonial">
+        <img src="https://i.pravatar.cc/100?11">
+        <div>
+          <p>“Dizitise completely changed my mindset and skills. I started freelancing within 2 months.”</p>
+          <strong>– Rohit Sharma</strong>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="card testimonial">
+        <img src="https://i.pravatar.cc/100?12">
+        <div>
+          <p>“The offline environment and mentors are insane. Real professional training.”</p>
+          <strong>– Anjali Verma</strong>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="card testimonial">
+        <img src="https://i.pravatar.cc/100?13">
+        <div>
+          <p>“I built my portfolio and got my first client through Dizitise.”</p>
+          <strong>– Karan Patel</strong>
+          <div class="stars">★★★★☆</div>
+        </div>
+      </div>
+
+      <!-- Duplicate for seamless loop -->
+      <div class="card testimonial">
+        <img src="https://i.pravatar.cc/100?11">
+        <div>
+          <p>“Dizitise completely changed my mindset and skills. I started freelancing within 2 months.”</p>
+          <strong>– Rohit Sharma</strong>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="card testimonial">
+        <img src="https://i.pravatar.cc/100?12">
+        <div>
+          <p>“The offline environment and mentors are insane. Real professional training.”</p>
+          <strong>– Anjali Verma</strong>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="card testimonial">
+        <img src="https://i.pravatar.cc/100?13">
+        <div>
+          <p>“I built my portfolio and got my first client through Dizitise.”</p>
+          <strong>– Karan Patel</strong>
+          <div class="stars">★★★★☆</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="map">
+  <div class="title">
+    <h3>Visit Our Campus</h3>
+  </div>
+
+  <div class="map-box">
+    <iframe 
+      src="https://www.google.com/maps?q=28.6139,77.2090&z=15&output=embed"
+      width="100%" 
+      height="420" 
+      style="border:0;" 
+      allowfullscreen 
+      loading="lazy">
+    </iframe>
+  </div>
+</section>
+
+
+
+<section id="contact" class="contact-section">
+  <div class="title">
+    <h3>Let’s Talk About Your Future 🚀</h3>
+    <p class="contact-sub">One click can start your digital journey.</p>
+  </div>
+
+  <!-- Quick Action Bar -->
+  <div class="quick-actions">
+    <a href="tel:+919XXXXXXXXX" class="qa-btn call">📞 Call</a>
+  </div>
+  <div class="quick-actions"></div>
+ <a href="https://instagram.com/your_instagram" target="_blank" class="qa-btn insta">📸 Instagram</a>
+  </section>div>
+ <div class="contact-wrapper">
+
+    <!-- Info Panel -->
+    <div class="contact-info">
+      <h2>📍 Visit Our Campus</h2>
+      <p>Your Institute Address, City, India</p>
+
+      <h2>📞 Phone</h2>
+      <p>+91 9XXXXXXXXX</p>
+
+      <h2>📧 Email</h2>
+      <p>info@dizitise.com</p>
+
+      <div class="contact-badges">
+        <span>Offline Classes</span>
+        <span>Real Mentors</span>
+        <span>Career Support</span>
+      </div>'<div class="quick-actions">
+    <a href="tel:+919XXXXXXXXX" class="qa-btn call">📞 Call</a>
+    
+
+  </div>
+    </div>
+
+    <!-- Form Panel -->
+    <div class="contact-form-box">
+      <h2>Send Us a Message</h2>
+      <form class="contact-form" onsubmit="submitContact(event)">
+        
+        <div class="input-group">
+          <input type="text" required>
+          <label>Your Name</label>
+        </div>
+
+        <div class="input-group">
+          <input type="tel" required>
+          <label>Phone Number</label>
+        </div>
+
+        <div class="input-group">
+          <input type="email" required>
+          <label>Email Address</label>
+        </div>
+
+        <div class="input-group">
+          <textarea rows="4" required></textarea>
+          <label>Your Message</label>
+        </div>
+
+        <button type="submit"  class="send-btn"> 
+          🚀 Send Message
+          <span class="btn-glow"></span>
+        </button>
+
+      </form>
+
+      <div class="success-message" id="successMsg">
+        ✨ Message Sent! We’ll contact you shortly.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* ================= CURSOR ================= */
+  const cursor = document.querySelector('.cursor');
+  if(cursor){
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top  = e.clientY + "px";
+    });
+  }
+
+  /* ================= MODAL ================= */
+  window.openModal = function(title, content){
+    const bg = document.getElementById('modalBg');
+    const modal = document.getElementById('modalContent');
+    if(bg && modal){
+      bg.style.display = "flex";
+      modal.innerHTML = `
+        <h3>${title}</h3>
+        <p style="margin-top:15px">${content}</p>
+        <button onclick="closeModal()">Close</button>
+      `;
+    }
+  }
+
+  window.closeModal = function(){
+    const bg = document.getElementById('modalBg');
+    if(bg) bg.style.display = "none";
+  }
+
+  /* ================= STATS COUNTER ================= */
+  const counters = document.querySelectorAll('.stat h2');
+  let started = false;
+
+  function animateCounter(el){
+    const target = +el.dataset.target;
+    let current = 0;
+    const speed = target / 60;
+
+    function update(){
+      current += speed;
+      if(current < target){
+        el.textContent = Math.floor(current);
+        requestAnimationFrame(update);
+      }else{
+        el.textContent = target;
+      }
+    }
+    update();
+  }
+
+  window.addEventListener("scroll", () => {
+    if(!started){
+      counters.forEach(counter => animateCounter(counter));
+      started = true;
+    }
+  });
+
+  /* ================= SECTION FADE REVEAL ================= */
+  const sections = document.querySelectorAll("section");
+
+  const revealObserver = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
+    });
+  },{threshold:0.15});
+
+  sections.forEach(sec => revealObserver.observe(sec));
+
+  /* ================= TYPING EFFECT (OFFLINE → ONLINE) ================= */
+  const words = ["First", "Offline", "Online"];
+  const typingElement = document.getElementById("typing-word");
+
+  if(typingElement){
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect(){
+      const currentWord = words[wordIndex];
+
+      if(!isDeleting){
+        typingElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+        if(charIndex === currentWord.length){
+          setTimeout(()=> isDeleting = true, 1000);
+        }
+      } else {
+        typingElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+        if(charIndex === 0){
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+        }
+      }
+
+      const speed = isDeleting ? 60 : 120;
+      setTimeout(typeEffect, speed);
+    }
+
+    typeEffect();
+  }
+
+  /* ================= MENTOR 3D TILT EFFECT ================= */
+  const mentorCards = document.querySelectorAll(".mentor-card");
+
+  mentorCards.forEach(card => {
+    card.addEventListener("mousemove", e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top  - rect.height / 2;
+
+      const rotateX = (-y / 20);
+      const rotateY = (x / 20);
+
+      card.style.transform = `
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        scale(1.05)
+      `;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+    });
+  });
+
+});
+function submitContact(e){
+  e.preventDefault();
+
+  const msg = document.getElementById("successMsg");
+  msg.style.display = "block";
+
+  setTimeout(()=>{
+    msg.style.display = "none";
+  },4000);
+
+  e.target.reset();
+}
+
+</script>
+
+
+</body>
+</html>
