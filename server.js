@@ -56,7 +56,7 @@ app.post("/contact", async (req, res) => {
     console.error("Mail Error:", error);
     res.status(500).json({
       success: false,
-      msg: "Failed to send message"
+      msg: error.message || "Server Error"
     });
   }
 });
