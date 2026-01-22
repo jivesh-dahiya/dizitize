@@ -9,14 +9,15 @@ app.use(express.json());
 
 // Brevo SMTP setup
 const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
+  host: process.env.MAIL_HOST,
   port: 587,
   secure: false,
   auth: {
-    user: "a075a5001@smtp-brevo.com",
-    pass: process.env.SMTP_KEY   // ⚠️ Put new key here
+    user: process.env.MAIL_AUTH,
+    pass: process.env.MAIL_PASS
   }
 });
+
 
 // Test route (optional but useful)
 app.get("/", (req, res) => {
