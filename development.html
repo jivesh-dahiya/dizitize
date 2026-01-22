@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dizitise | Course Details</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --neon:#00f5ff;
+  --purple:#b026ff;
+  --bg1:#04071c;
+  --bg2:#02040f;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+
+body{
+  background:
+    radial-gradient(1000px 600px at 10% 10%, rgba(0,245,255,.18), transparent 60%),
+    radial-gradient(1000px 600px at 90% 20%, rgba(176,38,255,.18), transparent 60%),
+    linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:white;
+  overflow-x:hidden;
+}
+
+/* ================= FADE SYSTEM ================= */
+.fade{
+  opacity:0;
+  transform:translateY(60px) scale(.95);
+  filter:blur(10px);
+  transition:1.4s cubic-bezier(.22,1,.36,1);
+}
+.fade.show{
+  opacity:1;
+  transform:none;
+  filter:blur(0);
+}
+
+/* ================= HERO ================= */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1200px;
+  overflow:hidden;
+}
+
+/* holographic rings */
+.ring{
+  position:absolute;
+  width:600px;
+  height:600px;
+  border-radius:50%;
+  border:2px solid rgba(0,245,255,.3);
+  filter:blur(1px);
+  animation:spin 20s linear infinite;
+}
+
+.ring.purple{
+  width:750px;
+  height:750px;
+  border-color:rgba(176,38,255,.25);
+  animation-duration:30s;
+}
+
+@keyframes spin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+.back-btn{
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:1000;
+  padding:10px 18px;
+  border-radius:30px;
+  background:rgba(10,15,40,.8);
+  border:1px solid var(--neon);
+  color:var(--neon);
+  font-weight:600;
+  text-decoration:none;
+  backdrop-filter:blur(12px);
+  box-shadow:0 0 15px rgba(0,245,255,.5);
+  transition:.3s ease;
+}
+.back-btn:hover{
+  background:linear-gradient(135deg,var(--neon),var(--purple));
+  color:black;
+}
+
+/* core energy orb */
+.core{
+  position:absolute;
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at center, rgba(48, 5, 104, 0.6), transparent 90%),
+    radial-gradient(circle at center, rgba(176,38,255,.6), transparent 90%);
+  filter:blur(40px);
+  opacity:.8;
+  animation:pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulse{
+  from{transform:scale(.9);}
+  to{transform:scale(1.15);}
+}
+
+/* floating glass shards */
+
+
+.shard:nth-child(1){top:20%;left:15%;}
+.shard:nth-child(2){top:60%;right:18%;animation-delay:1s;}
+.shard:nth-child(3){bottom:15%;left:30%;animation-delay:2s;}
+
+
+@keyframes floatShard{
+  from{transform:translateY(0) rotateY(0deg);}
+  to{transform:translateY(-40px) rotateY(25deg);}
+}
+
+/* HERO TEXT */
+.hero-content{
+  position:relative;
+  z-index:5;
+  text-align:center;
+  max-width:900px;
+  padding:40px;
+}
+
+.hero h1{
+  font-size:clamp(42px,6vw,82px);
+  background:linear-gradient(135deg,#00f5ff,#b026ff,#00ffd5);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 40px rgba(0,245,255,.9);
+}
+
+.hero p{
+  max-width:700px;
+  margin:20px auto 40px;
+  opacity:.9;
+  font-size:17px;
+}
+
+/* Buttons */
+.hero-actions{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:14px 38px;
+  border-radius:40px;
+  background:linear-gradient(135deg,var(--neon),var(--purple));
+  color:black;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 0 30px rgba(149, 12, 212, 0.7);
+  transition:.3s ease;
+}
+
+.btn.secondary{
+  background:transparent;
+  border:2px solid var(--neon);
+  color:white;
+}
+
+.btn:hover{transform:scale(1.15);}
+
+/* ================= SECTIONS ================= */
+section{
+  padding:100px 8%;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:60px;
+}
+
+.title h2{
+  font-size:40px;
+  color:var(--neon);
+  text-shadow:0 0 25px var(--neon);
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:40px;
+}
+
+.card{
+  background:rgba(10,15,40,.9);
+  border-radius:26px;
+  padding:30px;
+  border:1px solid rgba(0,245,255,.35);
+  backdrop-filter:blur(18px);
+  box-shadow:
+    0 0 30px rgba(0,245,255,.4),
+    inset 0 0 20px rgba(176,38,255,.3);
+  transition:.4s ease;
+}
+
+.card:hover{
+  transform:translateY(-14px) scale(1.05);
+  box-shadow:
+    0 0 50px rgba(0,245,255,.9),
+    inset 0 0 35px rgba(176,38,255,.5);
+}
+
+/* Floating CTA buttons */
+.whatsapp{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#25D366;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  color:white;
+  box-shadow:0 0 25px #25D366;
+  z-index:999;
+  text-decoration:none;
+}
+
+.book-call{
+  position:fixed;
+  bottom:25px;
+  left:25px;
+  padding:14px 30px;
+  border-radius:40px;
+  background:linear-gradient(135deg,var(--neon),var(--purple));
+  color:black;
+  font-weight:700;
+  box-shadow:0 0 30px rgba(0,245,255,.8);
+  text-decoration:none;
+  z-index:999;
+}
+/* ================= MOBILE GOD MODE ================= */
+@media (max-width: 768px){
+
+  /* Overall spacing smaller */
+  section{
+    padding:70px 6%;
+  }
+
+  /* HERO */
+  .hero{
+    min-height:90vh;
+    padding-top:80px;
+  }
+
+  /* Rings smaller & lighter */
+  .ring{
+    width:380px;
+    height:380px;
+    border-width:1px;
+    opacity:.35;
+  }
+
+  .ring.purple{
+    width:480px;
+    height:480px;
+    opacity:.25;
+  }
+
+  /* Core orb smaller */
+  .core{
+    width:180px;
+    height:180px;
+    filter:blur(25px);
+    opacity:.7;
+  }
+
+  /* Hide shards on mobile (too heavy + clutter) */
+  .shard{
+    display:none;
+  }
+
+  /* HERO TEXT */
+  .hero-content{
+    padding:20px;
+    max-width:100%;
+    font-size: small;
+  }
+
+  .hero h1{
+    font-size:28px;      /* main fix: smaller headline */
+    line-height:1.2;
+    text-shadow:0 0 20px rgba(0,245,255,.7);
+  }
+
+  .hero p{
+    font-size:13px;      /* smaller paragraph */
+    margin:12px auto 22px;
+    opacity:.85;
+  }
+
+  /* Buttons tighter */
+  .hero-actions{
+    gap:12px;
+  }
+
+  .btn{
+    padding:10px 22px;
+    font-size:13px;
+    border-radius:30px;
+    box-shadow:0 0 15px rgba(0,245,255,.6);
+  }
+
+  .btn:hover{
+    transform:none;   /* no big zoom on mobile */
+  }
+
+  /* TITLES */
+  .title{
+    margin-bottom:35px;
+  }
+
+  .title h2{
+    font-size:24px;
+    text-shadow:0 0 15px var(--neon);
+  }
+
+  /* GRID */
+  .grid{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  /* CARDS smaller & cleaner */
+  .card{
+    padding:18px;
+    border-radius:18px;
+    box-shadow:
+      0 0 15px rgba(0,245,255,.25),
+      inset 0 0 12px rgba(176,38,255,.2);
+  }
+
+  .card:hover{
+    transform:none;
+    box-shadow:
+      0 0 18px rgba(0,245,255,.35),
+      inset 0 0 15px rgba(176,38,255,.25);
+  }
+
+  .card h3{
+    font-size:15px;
+    margin-bottom:6px;
+  }
+
+  .card p,
+  .card li{
+    font-size:12px;
+    opacity:.85;
+  }
+
+  /* Floating buttons smaller */
+  .whatsapp{
+    width:48px;
+    height:48px;
+    font-size:22px;
+    bottom:16px;
+    right:16px;
+  }
+
+  .book-call{
+    padding:9px 18px;
+    font-size:12px;
+    border-radius:28px;
+    bottom:16px;
+    left:16px;
+    box-shadow:0 0 18px rgba(0,245,255,.6);
+  }
+
+}
+
+</style>
+</head>
+<a href="/index.html" class="back-btn">← Back</a>
+
+<!-- HERO -->
+<section class="hero fade">
+  <div class="ring"></div>
+  <div class="ring purple"></div>
+  <div class="core"></div>
+
+  <div class="shard"></div>
+  <div class="shard"></div>
+  <div class="shard"></div>
+
+  <div class="hero-content">
+    <h1>Professional Web Development Program</h1>
+    <p>
+      A powerful journey from beginner to full-stack creator.  
+      Learn to build real websites, web apps, and digital systems that
+      generate income and career opportunities worldwide.
+    </p>
+
+    <div class="hero-actions">
+      <a href="tel:+919991841977" class="btn">📞 Book a Call</a>
+      <a href="https://wa.me/919991841977" class="btn secondary">💬 WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY THIS COURSE -->
+<section class="fade">
+  <div class="title">
+    <h2>Why This Course Is Different</h2>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>💻 100% Project Based Learning</h3>
+      <p>
+        Build real websites, landing pages, dashboards, and applications,
+        not just practice code snippets.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🌍 Industry-Level Tech Stack</h3>
+      <p>
+        Learn the exact tools and technologies used by professional developers
+        and tech startups.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>⚡ AI Assisted Development</h3>
+      <p>
+        Use AI tools to write cleaner code faster, debug efficiently,
+        and increase productivity like senior developers.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- COURSE MODULES -->
+<section class="fade">
+  <div class="title">
+    <h2>Course Modules</h2>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>🌐 Frontend Foundations</h3>
+      <ul>
+        <li>HTML, CSS & Responsive Design</li>
+        <li>JavaScript Core Concepts</li>
+        <li>UI/UX for Developers</li>
+        <li>Website Performance Optimization</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>⚙ Backend Development</h3>
+      <ul>
+        <li>Node.js & Server Basics</li>
+        <li>Databases (MongoDB / SQL)</li>
+        <li>Authentication Systems</li>
+        <li>APIs & Data Handling</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🚀 Full Stack Projects</h3>
+      <ul>
+        <li>Portfolio Website</li>
+        <li>Business Website</li>
+        <li>Web App Dashboard</li>
+        <li>Real Client Style Projects</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>💰 Freelancing & Job System</h3>
+      <ul>
+        <li>Developer Portfolio Setup</li>
+        <li>Client Outreach Scripts</li>
+        <li>Pricing & Proposal Writing</li>
+        <li>Remote Job Preparation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER OUTCOMES -->
+<section class="fade">
+  <div class="title">
+    <h2>Career Outcomes</h2>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>👨‍💻 Freelance Web Developer</h3>
+      <p>
+        Earn ₹30,000 to ₹2,00,000+ per month by working with global clients.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🏢 Full Stack Developer</h3>
+      <p>
+        Get hired in tech companies, startups, and software agencies.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🚀 SaaS & Startup Builder</h3>
+      <p>
+        Build your own software products and digital platforms.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO SHOULD JOIN -->
+<section class="fade">
+  <div class="title">
+    <h2>Who Should Join This Program?</h2>
+  </div>
+
+  <div class="grid">
+    <div class="card">🎓 Students who want tech careers</div>
+    <div class="card">💻 Beginners with zero coding experience</div>
+    <div class="card">⚡ Designers who want development skills</div>
+    <div class="card">💼 Freelancers who want higher-paying projects</div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="fade">
+  <div class="title">
+    <h2>Start Your Development Career Today</h2>
+  </div>
+
+  <div style="text-align:center;">
+    <p style="max-width:700px;margin:0 auto 30px;opacity:.85;">
+      Code is the language of the future.  
+      Those who build, control opportunities.  
+      Book your call now and become a professional web developer.
+    </p>
+
+    <div class="hero-actions">
+      <a href="tel:+919991841977" class="btn">📞 Book a Free Call</a>
+      <a href="https://wa.me/919991841977" class="btn secondary">💬 WhatsApp Now</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FLOATING BUTTONS -->
+<a href="https://wa.me/919991841977" class="whatsapp">💬</a>
+<a href="tel:+919991841977" class="book-call">📞 Book Call</a>
+<script>
+/* Fade reveal */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{threshold:.2});
+
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+
+/* Mouse parallax for hero */
+document.addEventListener("mousemove", e=>{
+  const x = (e.clientX / window.innerWidth - .5) * 20;
+  const y = (e.clientY / window.innerHeight - .5) * 20;
+  document.querySelector(".hero-content").style.transform =
+    `rotateX(${-y}deg) rotateY(${x}deg)`;
+});
+</script>
+
+</body>
+</html>

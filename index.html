@@ -86,6 +86,78 @@ nav a:hover{color:var(--neon);}
   grid-template-columns:1.1fr .9fr;
   gap:60px;
 }
+
+/* Ensure hero tiles have spacing */
+/* Hero */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:60px;
+}
+
+/* ================= SCATTERED HERO TILES ================= */
+.hero-right{
+  position:relative;
+  height:420px;   /* important for absolute positioning */
+}
+
+/* Cards */
+.card{
+  position:absolute;
+  padding:28px;
+  border-radius:22px;
+  background:linear-gradient(135deg, rgba(76, 0, 255, 0.1), rgba(176,38,255,.1));
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(58, 115, 180, 0.15);
+  box-shadow:0 0 25px rgba(0,245,255,.3);
+  transition:.4s cubic-bezier(.2,.8,.2,1);
+  animation:floatHero 6s ease-in-out infinite alternate;
+}
+
+.card:hover{
+  transform:translateY(-12px) scale(1.05);
+  box-shadow:
+    0 0 40px rgba(0,245,255,.6),
+    0 0 80px rgba(176,38,255,.4);
+}
+
+/* Individual scattered positions */
+.card-one{
+  top:30px;
+  left:40px;
+}
+
+.card-two{
+  top:170px;
+  right:30px;
+  animation-delay:1.5s;
+}
+
+.card-three{
+  bottom:30px;
+  left:120px;
+  animation-delay:3s;
+}
+
+/* Floating effect */
+@keyframes floatHero{
+  from{transform:translateY(0);}
+  to{transform:translateY(-18px);}
+}
+
+/* ================= MOBILE (HIDE TILES) ================= */
+@media(max-width:768px){
+  .hero-right{
+    display:none;
+  }
+}
+
 .hero-left h2{
   font-size:clamp(36px,5vw,60px);
   line-height:1.1;
@@ -111,7 +183,7 @@ nav a:hover{color:var(--neon);}
 .card{
   padding:28px;
   border-radius:22px;
-  background:var(--glass);
+  background:linear-gradient(135deg,var(--neon),var(--purple));
   backdrop-filter:blur(18px);
   border:1px solid rgba(255,255,255,.15);
   box-shadow:0 0 25px rgba(0,245,255,.3);
@@ -136,256 +208,207 @@ nav a:hover{color:var(--neon);}
   font-weight:700;
   cursor:pointer;
 }
+/* ================== OUR CORE TEAM – GOD LEVEL UI ================== */
 
-/* ================= GOD LEVEL MODAL ================= */
-
-/* Background Overlay */
-.modal-bg{
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(circle at top, rgba(17, 0, 255, 0.15), transparent 40%),
-    radial-gradient(circle at bottom, rgba(200, 154, 226, 0.15), transparent 30%),
-    rgba(0,0,0,.75);
-  backdrop-filter: blur(16px) saturate(160%);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 99999;
-  animation: modalFadeIn .4s ease forwards;
+#team{
+  padding:120px 8%;
+  position:relative;
+  background: transparent;
 }
 
-/* Fade animation */
-@keyframes modalFadeIn{
-  from{opacity:0}
-  to{opacity:1}
+#team .title h3{
+  font-size:46px;
+  text-align:center;
+  background:linear-gradient(135deg,#00f5ff,#b026ff);
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 20px rgb(255, 255, 255);
 }
 
-/* Modal Box */
-.modal{
-  position: relative;
-  background:
-    linear-gradient(145deg, rgba(0, 28, 241, 0.98), rgba(10, 10, 78, 0.98));
-  padding: 38px;
-  border-radius: 26px;
-  max-width: 560px;
-  width: 92%;
-  color: #fff;
-  box-shadow:
-    0 0 25px rgba(0,245,255,.5),
-    0 0 60px rgba(176,38,255,.25),
-    inset 0 0 20px rgba(255,255,255,.05);
-  transform: scale(.7) translateY(40px);
-  opacity: 0;
-  animation: modalPop .45s cubic-bezier(.2,.8,.2,1) forwards;
-  overflow: hidden;
+/* Grid */
+.mentors-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:40px;
+  perspective:1200px;
 }
 
-/* Pop animation */
-@keyframes modalPop{
-  to{
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
+/* Card */
+.mentor-card{
+  position:relative;
+  text-decoration:none;
+  border-radius:30px;
+  padding:2px;
+  transform-style:preserve-3d;
+  transition:.5s cubic-bezier(.2,.8,.2,1);
 }
 
-/* Neon Border Glow */
-.modal::before{
-  content:"";
+.mentor-card:hover{
+  transform:rotateX(8deg) rotateY(-8deg) scale(1.05);
+}
+
+/* Glow Background */
+.mentor-glow{
   position:absolute;
-  inset:-2px;
-  border-radius:26px;
-  background: linear-gradient(135deg, var(--neon), var(--purple), var(--neon));
-  filter: blur(14px);
-  opacity:.8;
-  z-index:-1;
+  inset:-40%;
+  background:radial-gradient(circle,#f3f3f3,transparent 65%);
+  opacity:.35;
+  filter:blur(80px);
+  z-index:1;
+}
+.mentor-glow.purple{
+  background:radial-gradient(circle,#f9f7fa,transparent 65%);
+}
+.mentor-glow.green{
+  background:radial-gradient(circle,#7cff00,transparent 65%);
 }
 
-/* Glass reflection layer */
-.modal::after{
+/* Content */
+.mentor-content{
+  position:relative;
+  z-index:2;
+  padding:34px;
+  border-radius:28px;
+  
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.15);
+  text-align:center;
+  overflow:hidden;
+  box-shadow:
+    0 0 2px rgba(0,245,255,.35),
+    inset 0 0 20px rgba(255,255,255,.05);
+  transition:.4s ease;
+}
+
+/* Hologram scan */
+.mentor-content::after{
   content:"";
   position:absolute;
   inset:0;
-  border-radius:26px;
-  background: linear-gradient(
+  background:linear-gradient(
     120deg,
-    rgba(255,255,255,.12),
-    transparent 40%,
-    transparent 60%,
-    rgba(255,255,255,.08)
+    transparent 35%,
+    rgba(0,245,255,.35),
+    transparent 65%
   );
-  opacity:.35;
-  pointer-events:none;
+  opacity:0;
+  transform:translateX(-120%);
+  transition:.7s ease;
+}
+.mentor-card:hover .mentor-content::after{
+  opacity:1;
+  transform:translateX(120%);
 }
 
-/* Header */
-.modal h3{
-  color: white;
-  font-size: 45px;
-  text-shadow: 
-    0 0 10px var(--neon),
-    0 0 20px rgba(0,245,255,.7);
-  margin-bottom: 12px;
-  text-align: center;
+/* Avatar */
+.mentor-content img{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  border:3px solid var(--neon);
+  box-shadow:
+    0 0 20px var(--neon),
+    0 0 40px rgba(0,245,255,.6);
+  margin-bottom:15px;
+  transition:.4s ease;
+}
+.mentor-card:hover img{
+  transform:scale(1.1) rotate(2deg);
 }
 
-/* Paragraph */
-.modal p{
-  border-radius: 12px;
-  padding: 20px;
-  line-height: 1.6;
-  opacity: .9;
-  text-align: left;
-  border: solid 2px white;
+/* Name */
+.mentor-content h4{
+  font-size:22px;
+  margin-bottom:5px;
+  color:var(--neon);
+  text-shadow:0 0 12px var(--neon);
 }
-.modal h4{
-  line-height: 1.6;
-  opacity: .9;
-  text-align: left;
-  font-size: larger;
+
+/* Role */
+.mentor-content p{
+  font-size:14px;
+  opacity:.85;
+  margin-bottom:12px;
+}
+
+/* Skill Chips */
+.chips{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin:12px 0;
+}
+.chips span{
+  font-size:11px;
+  padding:6px 14px;
+  border-radius:20px;
+  background:
+    linear-gradient(135deg, rgba(0,245,255,.25), rgba(176,38,255,.25));
+  border:1px solid rgba(0,245,255,.5);
+  box-shadow:0 0 1px rgba(0,245,255,.5);
+  transition:.3s ease;
+}
+.chips span:hover{
+  transform:scale(1.15);
+  box-shadow:0 0 25px rgba(0,245,255,1);
+}
+
+/* Stars */
+.stars{
+  color:gold;
+  letter-spacing:2px;
+  text-shadow:0 0 10px gold;
+  margin:8px 0;
 }
 
 /* Button */
-.modal button{
-  margin-top: 26px;
-  padding: 12px 34px;
-  border: none;
-  border-radius: 40px;
-  background: radial-gradient(neon-blue);
-  color: #000;
-  font-weight: 800;
-  letter-spacing: .4px;
-  cursor: pointer;
-  transition: .3s ease;
+.mentor-content .btn{
+  margin-top:14px;
+  display:inline-block;
+  padding:10px 26px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#00f5ff,#b026ff);
+  color:#000;
+  font-weight:800;
+  letter-spacing:.5px;
   box-shadow:
     0 0 12px rgba(0,245,255,.6),
-    0 0 30px rgba(176,38,255,.4);
+    0 0 30px rgba(176,38,255,.5);
+  transition:.3s ease;
 }
-
-/* Button hover */
-.modal button:hover{
-  transform: scale(1.08);
+.mentor-content .btn:hover{
+  transform:scale(1.15);
   box-shadow:
     0 0 25px rgba(0,245,255,1),
     0 0 60px rgba(176,38,255,.8);
 }
 
-/* Button active */
-.modal button:active{
-  transform: scale(.95);
+/* Floating Animation */
+.mentor-card{
+  animation:teamFloat 6s ease-in-out infinite alternate;
+}
+.mentor-card:nth-child(2){animation-duration:7.5s;}
+.mentor-card:nth-child(3){animation-duration:9s;}
+
+@keyframes teamFloat{
+  from{transform:translateY(0);}
+  to{transform:translateY(-18px);}
 }
 
-/* Optional: Smooth glow breathing effect */
-.modal{
-  animation: modalPop .45s cubic-bezier(.2,.8,.2,1) forwards,
-             glowPulse 4s ease-in-out infinite alternate;
-}
-
-@keyframes glowPulse{
-  from{
-    box-shadow:
-      0 0 20px rgba(0,245,255,.4),
-      0 0 50px rgba(176,38,255,.2);
+/* Mobile */
+@media(max-width:768px){
+  #team{
+    padding:80px 6%;
   }
-  to{
-    box-shadow:
-      0 0 40px rgba(0,245,255,.8),
-      0 0 90px rgba(176,38,255,.6);
+  .mentor-content{
+    padding:26px;
+  }
+  .mentor-card{
+    animation:none;
   }
 }
 
-
-/* Stats */
-.stat h2{
-  font-size:48px;
-  color:var(--neon);
-  text-shadow:0 0 15px var(--neon);
-}
-
-/* Profile */
-.profile{text-align:center;}
-.profile img{
-  width:80px;height:80px;border-radius:50%;
-  border:2px solid var(--neon);
-  box-shadow:0 0 15px var(--neon);
-  margin-bottom:10px;
-}
-.stars{color:gold;margin-top:5px;}
-
-/* Testimonials */
-.testimonial{display:flex;gap:15px;}
-.testimonial img{
-  width:50px;height:50px;border-radius:50%;
-  border:2px solid var(--purple);
-}
-
-/* Map */
-.map-box{
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:0 0 40px rgba(0,245,255,.4);
-}
-
-/* Contact */
-.contact-form{display:grid;gap:15px;}
-.contact-form input,
-.contact-form textarea{
-  padding:14px;border-radius:10px;
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.2);
-  color:#fff;
-}
-.contact-form button{
-  padding:14px;border:none;border-radius:30px;
-  background:linear-gradient(135deg,var(--neon),var(--purple));
-  color:black;font-weight:700;
-}
-.hero-right{
-  position:relative;
-  height:380px;
-  
-}
-
-/* Random positions */
-.card-one{
-  position:absolute;
-  top:20px;
-  left:40px;
-   background:linear-gradient(135deg,var(--neon),var(--purple));
-   font-size: larger;
-}
-.card-two{
-  position:absolute;
-  top:140px;
-  left:180px;
-   background:linear-gradient(135deg,var(--neon),var(--purple));
-   font-size: larger;
-}
-.card-three{
-  position:absolute;
-  top:260px;
-  left:80px;
-   background:linear-gradient(135deg,var(--neon),var(--purple));
-   font-size: larger;
-}
-
-/* Floating animation */
-.float-card{
-  animation:float 6s ease-in-out infinite alternate;
-}
-
-.card-two{ animation-duration:8s; }
-.card-three{ animation-duration:10s; }
-
-@keyframes float{
-  from{ transform:translateY(0px); }
-  to{ transform:translateY(-25px); }
-}
-@keyframes float{
-  0%   { transform:translate(0, 0); }
-  50%  { transform:translate(6px, -20px); }
-  100% { transform:translate(-6px, -40px); }
-}
 
 
 /* WhatsApp */
@@ -513,11 +536,7 @@ nav a:hover{color:var(--neon);}
     font-size:34px;
   }
 
-  /* Modal better fit */
-  .modal{
-    padding:25px;
-    max-width:90%;
-  }
+  
 
  /* Make sure nothing blocks fixed elements */
 body{
@@ -712,7 +731,9 @@ body{
 @keyframes courseFloat{
   from{ transform:translateY(0px); }
   to{ transform:translateY(-14px); }
+
 }
+
 /* === HOLOGRAPHIC ORBIT STATS === */
 
 .stats-orbit{
@@ -720,7 +741,7 @@ body{
   justify-content:center;
   gap:140px;
   flex-wrap:wrap;
-  margin-top:90px;
+  margin-top:10px;
 }
 
 .orb-stat{
@@ -740,7 +761,7 @@ body{
 
 @keyframes orbFloat{
   from{transform:translateY(0);}
-  to{transform:translateY(-18px);}
+  to{transform:translateY(-9px);}
 }
 
 /* Core Glass Orb */
@@ -781,6 +802,120 @@ body{
   font-weight: bold;
 }
 
+/* Mobile: keep stats orbs on one horizontal line (scrollable like reviews) */
+@media (max-width: 768px) {
+  .stats-orbit{
+    gap:18px !important;
+    flex-wrap:nowrap !important;
+    overflow-x:auto;
+    padding:18px 6%;
+    -webkit-overflow-scrolling:touch;
+  }
+
+/* Scrolling stats track styling and smooth fade masks (behaves like reviews) */
+.stats-wrapper{
+  position:relative;
+  overflow:hidden;
+  padding:16px 0;
+}
+.stats-wrapper::before,
+.stats-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  width:100px;
+  height:100%;
+  pointer-events:none;
+  z-index:2;
+}
+.stats-wrapper::before{ left:0; background:linear-gradient(to right, rgba(6,14,73,0.95), transparent); }
+.stats-wrapper::after{ right:0; background:linear-gradient(to left, rgba(6,14,73,0.95), transparent); }
+
+.stats-track{
+  display:flex;
+  gap:28px;
+  width:max-content;
+  align-items:center;
+}
+
+/* Allow horizontal manual scrolling (wheel/touch) while keeping auto-scroll; hide scrollbar */
+.stats-wrapper{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.stats-wrapper::-webkit-scrollbar{ display:none; }
+.stats-track{ flex-wrap:nowrap; white-space:nowrap; }
+
+@keyframes scrollStats{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+/* Enable the smooth auto-scroll and touch-swipe on small screens */
+@media (max-width: 900px){
+  .stats-track{ animation:scrollStats 20s linear infinite; }
+  .stats-wrapper{ -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 12%, rgba(0,0,0,1) 88%, rgba(0,0,0,0) 100%); mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 12%, rgba(0,0,0,1) 88%, rgba(0,0,0,0) 100%); }
+  .stats-track:hover{ animation-play-state:paused; }
+}
+
+/* Increase orb size a bit and ensure uniform inline layout */
+@media (min-width: 901px){
+  .orb-stat{ width:300px; height:300px; }
+  .orb-content{ width:300px; height:300px; }
+}
+
+@media (max-width:900px){
+  .orb-stat{ flex:0 0 auto; width:160px; height:160px; }
+  .orb-content{ width:150px; height:150px; }
+  .orb-content h2{ font-size:36px; }
+}
+/* Phone specific: larger, glossy orbs and no floating — move straight in the scroll track */
+@media (max-width:768px){
+  .orb-stat{
+    flex:0 0 auto !important;
+    width:220px !important;
+    height:220px !important;
+    margin:0 10px !important;
+    animation:none !important;
+  }
+  .orb-stat svg{
+    position:relative !important;
+    width:220px !important;
+    height:220px !important;
+  }
+  .orb-content{
+    width:300px !important;
+    height:300px !important;
+    padding:12px !important;
+    border-radius:50% !important;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.18), transparent 10%), linear-gradient(180deg, rgba(10,30,80,0.9), rgba(60,18,140,0.95)) !important;
+    box-shadow: 0 12px 30px rgba(8,12,35,0.6), inset 0 8px 18px rgba(255,255,255,0.04) !important;
+  }
+  .orb-content h2{ font-size:94px !important; }
+  /* Ensure scrolling track moves in straight line — already handled by scrollStats keyframes */
+}
+  .stats-orbit::-webkit-scrollbar{ display:none; }
+
+  .orb-stat{
+    flex:0 0 auto;
+    width:120px !important;
+    height:120px !important;
+  }
+
+  .orb-stat svg{
+    width:120px !important;
+    height:120px !important;
+  }
+
+  .orb-content{
+    width:120px !important;
+    height:120px !important;
+    padding:6px !important;
+  }
+
+  .orb-content h2{ font-size:42px !important; }
+  .orb-content p{ font-size:33px !important; }
+}
 /* Neon ring */
 .orb-stat svg{
   position:absolute;
@@ -805,8 +940,8 @@ body{
   margin-top:12px;
   padding:10px 22px;
   border-radius:25px;
-  background:linear-gradient(135deg,#00f5ff,#b026ff);
-  color:black;
+  background:linear-gradient(135deg,#00f5ff,#4e26ff);
+  color:white;
   font-weight:700;
    
 }
@@ -829,106 +964,119 @@ body{
   0%,50%,100%{opacity:1;}
   25%,75%{opacity:0;}
 }
+
 /* ===== GOD LEVEL MENTOR CARDS ===== */
 
-/* ===== MENTOR GOD LEVEL UI ===== */
+/* ===== CLEAN NEON TEAM UI ===== */
 
 .mentors-grid{
   perspective:1200px;
 }
 
+/* Card */
 .mentor-card{
   position:relative;
-  border-radius:28px;
+  border-radius:26px;
   padding:2px;
   overflow:hidden;
   cursor:pointer;
   transform-style:preserve-3d;
   transition:.4s cubic-bezier(.2,.8,.2,1);
-  animation:mentorFloat 8s ease-in-out infinite alternate;
+  animation:mentorFloat 10s ease-in-out infinite alternate;
 }
 
-.mentor-card:nth-child(2){animation-duration:10s;}
-.mentor-card:nth-child(3){animation-duration:12s;}
+.mentor-card:nth-child(2){animation-duration:12s;}
+.mentor-card:nth-child(3){animation-duration:14s;}
 
 @keyframes mentorFloat{
   from{transform:translateY(0);}
-  to{transform:translateY(-20px);}
+  to{transform:translateY(-14px);}
 }
 
+/* The floating movement lives here */
+.mentor-float{
+  animation:mentorFloat 10s ease-in-out infinite alternate;
+}
+
+/* Mentor card handles ONLY 3D tilt */
+.mentor-card{
+  position:relative;
+  border-radius:26px;
+  padding:2px;
+  overflow:hidden;
+  cursor:pointer;
+  transform-style:preserve-3d;
+  perspective:1200px;
+}
+
+/* Remove transform from hover */
+/* Floating layer */
+.mentor-float{
+  animation:mentorFloat 10s ease-in-out infinite alternate;
+}
+
+/* Card handles only 3D tilt */
+.mentor-card{
+  perspective:1200px;
+  transform-style:preserve-3d;
+}
+
+/* Remove ALL transform from hover */
 .mentor-card:hover{
   box-shadow:
-    0 0 40px rgba(0,245,255,.6),
-    0 0 80px rgba(176,38,255,.4);
+    0 0 30px rgba(0,245,255,.5),
+    0 0 60px rgba(176,38,255,.35);
 }
 
-/* Hologram scan line */
+
+/* Soft scan highlight */
 .mentor-card::after{
   content:"";
   position:absolute;
   inset:0;
   background:linear-gradient(
     120deg,
-    transparent 30%,
-    rgba(0,245,255,.35),
-    transparent 70%
+    transparent 35%,
+    rgba(255,255,255,.18),
+    transparent 65%
   );
   opacity:0;
   transform:translateX(-120%);
   transition:.7s ease;
   pointer-events:none;
 }
-.mentor-card:hover::after{
-  opacity:1;
-  transform:translateX(120%);
-}
-.mentor-card{
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.15s ease, box-shadow 0.2s ease;
-  will-change: transform;
-}
-
-.mentor-card:hover{
-  box-shadow:
-    0 25px 50px rgba(0,245,255,0.5),
-    0 0 80px rgba(176,38,255,0.4);
-}
-
-/* Disable on mobile */
-@media(max-width:768px){
-  .mentor-card{
-    transform: none !important;
-  }
-}
 
 
-/* Glow background */
+/* Glow Background */
 .mentor-glow{
   position:absolute;
-  inset:-40%;
-  background:radial-gradient(circle,#00f5ff,transparent 65%);
-  opacity:.35;
-  filter:blur(80px);
+  inset:-35%;
+  background:radial-gradient(circle, rgba(98, 0, 255, 0.45), transparent 65%);
+  opacity:.25;
+  filter:blur(70px);
   z-index:1;
 }
 .mentor-glow.purple{
-  background:radial-gradient(circle,#b026ff,transparent 65%);
+  background:radial-gradient(circle, rgba(176,38,255,.45), transparent 65%);
 }
 .mentor-glow.green{
-  background:radial-gradient(circle,#7cff00,transparent 65%);
+  background:radial-gradient(circle, rgba(124,255,0,.4), transparent 65%);
 }
 
 /* Content */
 .mentor-content{
   position:relative;
   z-index:2;
-  padding:32px;
-  border-radius:26px;
-  background:rgba(10,15,40,.85);
+  padding:28px;
+  border-radius:24px;
+  background:rgba(255,255,255,.08);
   backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.35);
   text-align:center;
+  color:white;
+  box-shadow:
+    inset 0 0 15px rgba(255,255,255,.05),
+    0 0 20px rgba(0,245,255,.15);
 }
 
 /* Image */
@@ -936,18 +1084,25 @@ body{
   width:90px;
   height:90px;
   border-radius:50%;
-  border:2px solid var(--neon);
-  box-shadow:0 0 20px var(--neon);
+  border:2px solid #fff;
+  box-shadow:
+    0 0 10px rgba(0,245,255,.7),
+    0 0 25px rgba(0,245,255,.5);
   margin-bottom:12px;
 }
 
 /* Name */
 .mentor-content h4{
-  color:var(--neon);
+  color:white;
   font-size:20px;
+  font-weight:600;
+  margin-bottom:4px;
 }
+
+/* Role */
 .mentor-content p{
-  opacity:.8;
+  opacity:.9;
+  font-size:13px;
 }
 
 /* Chips */
@@ -956,31 +1111,46 @@ body{
   gap:8px;
   justify-content:center;
   flex-wrap:wrap;
-  margin:10px 0;
+  margin:12px 0;
 }
 .chips span{
   font-size:11px;
-  padding:4px 10px;
+  padding:5px 12px;
   border-radius:20px;
-  background:rgba(0,245,255,.15);
-  border:1px solid rgba(0,245,255,.4);
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.4);
+  color:white;
+  box-shadow:0 0 8px rgba(0,245,255,.25);
 }
 
 /* Stars */
 .stars{
   color:gold;
-  margin:6px 0;
+  margin:8px 0;
+  text-shadow:0 0 6px rgba(255,215,0,.6);
 }
 
 /* Button */
 .btn{
   display:inline-block;
   margin-top:12px;
-  padding:10px 22px;
-  border-radius:25px;
+  padding:9px 22px;
+  border-radius:24px;
   background:linear-gradient(135deg,#00f5ff,#b026ff);
-  color:black;
+  color:#000;
   font-weight:700;
+  letter-spacing:.4px;
+  box-shadow:
+    0 0 12px rgba(0,245,255,.6),
+    0 0 24px rgba(176,38,255,.4);
+  transition:.3s ease;
+}
+
+.btn:hover{
+  transform:scale(1.08);
+  box-shadow:
+    0 0 18px rgba(0,245,255,.9),
+    0 0 40px rgba(176,38,255,.6);
 }
 
 /* Mobile */
@@ -989,12 +1159,18 @@ body{
     animation:none;
   }
 }
-/* REVIEWS HORIZONTAL SCROLL */
+
+#reviews{
+  position:relative;
+  overflow:hidden;
+  z-index:5;
+}
+
 .reviews-wrapper{
   width:100%;
   overflow:hidden;
   position:relative;
-  padding:20px 0;
+  padding:40px 0;
 }
 
 .reviews-track{
@@ -1004,117 +1180,34 @@ body{
   animation:scrollReviews 35s linear infinite;
 }
 
-
-
 @keyframes scrollReviews{
-  from{
-    transform:translateX(0);
-  }
-  to{
-    transform:translateX(-50%);
-  }
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
 }
 
-/* Make cards look premium in slider */
+/* Review Card */
 .testimonial{
-  min-width:320px;
-  max-width:360px;
+  min-width:340px;
+  max-width:340px;
   display:flex;
   gap:15px;
   align-items:flex-start;
-  background:rgba(10,15,40,.75);
-  backdrop-filter:blur(14px);
-  border:1px solid rgba(0,245,255,.3);
-  box-shadow:
-    0 0 5px rgba(0,245,255,.25),
-    inset 0 0 15px rgba(176,38,255,.2);
-  transition:.4s;
-}
-
-.testimonial:hover{
-  transform:scale(1.05);
-  box-shadow:
-    0 0 25px rgba(0,245,255,.5),
-    inset 0 0 25px rgba(176,38,255,.3);
-}
-
-.testimonial img{
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  border:2px solid var(--neon);
-  box-shadow:0 0 12px var(--neon);
-}
-/* REVIEWS HORIZONTAL SCROLL */
-.reviews-wrapper{
-  width:100%;
-  overflow:hidden;
-  position:relative;
-  padding:30px 0;
-
-  /* Soft fade on edges */
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
-  );
-}
-
-.reviews-track{
-  display:flex;
-  gap:30px;
-  width:max-content;
-  animation:scrollReviews 40s linear infinite;
-}
-
-/* Remove pause on hover */
-/*
-.reviews-wrapper:hover .reviews-track{
-  animation-play-state: paused;
-}
-*/
-
-@keyframes scrollReviews{
-  from{
-    transform:translateX(0);
-  }
-  to{
-    transform:translateX(-50%);
-  }
-}
-
-/* Review card premium look */
-.testimonial{
-  min-width:320px;
-  max-width:360px;
-  display:flex;
-  gap:15px;
-  align-items:flex-start;
-  background:rgba(10,15,40,.75);
-  backdrop-filter:blur(14px);
+  background:rgba(10,15,40,.85);
+  backdrop-filter:blur(12px);
   border:1px solid rgba(0,245,255,.25);
   border-radius:22px;
   padding:22px;
   box-shadow:
-    0 0 25px rgba(0,245,255,.25),
-    inset 0 0 15px rgba(176,38,255,.2);
+    0 0 20px rgba(0,245,255,.35),
+    inset 0 0 15px rgba(176,38,255,.25);
   transition:.4s ease;
 }
 
 .testimonial:hover{
   transform:translateY(-6px) scale(1.04);
   box-shadow:
-    0 0 10px rgba(0,245,255,.6),
-    inset 0 0 25px rgba(176,38,255,.4);
+    0 0 35px rgba(0,245,255,.7),
+    inset 0 0 25px rgba(176,38,255,.5);
 }
 
 .testimonial img{
@@ -1123,6 +1216,134 @@ body{
   border-radius:50%;
   border:2px solid var(--neon);
   box-shadow:0 0 12px var(--neon);
+}
+
+/* Soft fade edges */
+.reviews-wrapper::before,
+.reviews-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  width:80px;
+  height:100%;
+  z-index:3;
+  pointer-events:none;
+}
+
+.reviews-wrapper::before{
+  left:0;
+  background:linear-gradient(to right, #050509, transparent);
+}
+.reviews-wrapper::after{
+  right:0;
+  background:linear-gradient(to left, #050509, transparent);
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .testimonial{
+    min-width:280px;
+    max-width:280px;
+  }
+}
+
+/* Enforce hero tiles hidden on small screens and uniform section spacing */
+@media (max-width: 768px) {
+  .hero-right { display: none !important; }
+  section { padding: 70px 6% !important; }
+}
+
+/* Remove review fade overlays on user request */
+.reviews-wrapper::before,
+.reviews-wrapper::after{
+  display:none !important;
+  content:none !important;
+}
+#reviews{
+  position:relative;
+  overflow:hidden;
+  z-index:5;
+}
+
+.reviews-wrapper{
+  width:100%;
+  overflow:hidden;
+  position:relative;
+  padding:40px 0;
+}
+
+.reviews-track{
+  display:flex;
+  gap:30px;
+  width:max-content;
+  animation:scrollReviews 35s linear infinite;
+}
+
+@keyframes scrollReviews{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+/* Review Card */
+.testimonial{
+  min-width:340px;
+  max-width:340px;
+  display:flex;
+  gap:15px;
+  align-items:flex-start;
+  background:rgba(10,15,40,.85);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(0,245,255,.25);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:
+    0 0 20px rgba(0,245,255,.35),
+    inset 0 0 15px rgba(176,38,255,.25);
+  transition:.4s ease;
+}
+
+.testimonial:hover{
+  transform:translateY(-6px) scale(1.04);
+  box-shadow:
+    0 0 35px rgba(0,245,255,.7),
+    inset 0 0 25px rgba(176,38,255,.5);
+}
+
+.testimonial img{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  border:2px solid var(--neon);
+  box-shadow:0 0 12px var(--neon);
+}
+
+/* Soft fade edges */
+.reviews-wrapper::before,
+.reviews-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  width:80px;
+  height:100%;
+  z-index:3;
+  pointer-events:none;
+}
+
+.reviews-wrapper::before{
+  left:0;
+  background:linear-gradient(to right, #050509, transparent);
+}
+.reviews-wrapper::after{
+  right:0;
+  background:linear-gradient(to left, #050509, transparent);
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .testimonial{
+    min-width:280px;
+    max-width:280px;
+  }
 }
 
 .contact-section{
@@ -1270,9 +1491,516 @@ body{
 body{
   transform: none !important;
 }
+/* ===== COURSES – UNIQUE STYLE (NOT LIKE MENTORS) ===== */
+
+.courses-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:35px;
+}
+
+/* Card */
+.course-card{
+  position:relative;
+  text-decoration:none;
+  border-radius:22px;
+  overflow:hidden;
+  background:linear-gradient(145deg,#ffffff12,#ffffff05);
+  border:1px solid rgba(255,255,255,.25);
+  transition:.35s ease;
+  backdrop-filter:blur(14px);
+}
+
+/* Subtle lift */
+.course-card:hover{
+  transform:translateY(-8px);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.4),
+    0 0 20px rgba(0,245,255,.35);
+}
+
+/* Color accents */
+.course-card.blue{ --c:#00f5ff; }
+.course-card.purple{ --c:#b026ff; }
+.course-card.green{ --c:#7cff00; }
+.course-card.cyan{ --c:#00ffd5; }
+
+/* Glow */
+.course-glow{
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle,var(--c),transparent 65%);
+  opacity:.18;
+  filter:blur(70px);
+  z-index:0;
+}
+
+/* Content */
+.course-content{
+  position:relative;
+  z-index:1;
+  padding:26px;
+  text-align:left;
+  color:white;
+}
+
+/* Image */
+.course-content img{
+  width:60px;
+  height:60px;
+  border-radius:12px;
+  box-shadow:0 0 12px var(--c);
+  margin-bottom:12px;
+}
+
+/* Title */
+.course-content h4{
+  font-size:20px;
+  margin:4px 0;
+  color:white;
+}
+
+/* Subtitle */
+.course-content p{
+  font-size:13px;
+  opacity:.85;
+  margin-bottom:14px;
+}
+
+/* Tags */
+.course-tags{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.course-tags span{
+  font-size:10px;
+  padding:4px 10px;
+  border-radius:14px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
+  color:white;
+}
+
+/* Footer */
+.course-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:16px;
+  font-size:13px;
+}
+
+.course-footer span{
+  color:gold;
+}
+
+/* Explore */
+.course-footer .open{
+  color:var(--c);
+  font-weight:600;
+  transition:.3s ease;
+}
+.course-card:hover .course-footer .open{
+  transform:translateX(4px);
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .course-card:hover{
+    transform:none;
+  }
+}
+/* ================= REVIEWS FIX – FORCE VISIBILITY ================= */
+
+#reviews{
+  position:relative;
+  z-index:20;
+  opacity:1 !important;
+  transform:none !important;
+  overflow:hidden;
+  margin-bottom:0;
+}
+
+/* Prevent map from overlapping */
+#map{
+  position:relative;
+  z-index:1;
+}
+
+/* Wrapper */
+.reviews-wrapper{
+  width:100%;
+  overflow:hidden;
+  position:relative;
+  padding:50px 0;
+  min-height:220px;
+  z-index:1;
+}
+
+/* Smooth mask fade so content fades out gradually at edges */
+.reviews-wrapper{
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.6) 12%,
+    rgba(0,0,0,1) 25%,
+    rgba(0,0,0,1) 75%,
+    rgba(0,0,0,0.6) 88%,
+    rgba(0,0,0,0) 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.6) 12%,
+    rgba(0,0,0,1) 25%,
+    rgba(0,0,0,1) 75%,
+    rgba(0,0,0,0.6) 88%,
+    rgba(0,0,0,0) 100%
+  );
+  -webkit-mask-size:100% 100%;
+  mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+}
+
+/* Track must stay horizontal */
+.reviews-track{
+  display:flex;
+  width:max-content;
+  gap:30px;
+  animation:scrollReviews 35s linear infinite;
+  position:relative;
+  z-index:3;   /* cards layer */
+}
+
+/* Continuous animation */
+@keyframes scrollReviews{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+/* Review Card */
+.testimonial{
+  position:relative !important;
+  z-index:4;  /* always above fade */
+  min-width:340px;
+  max-width:340px;
+  background:rgba(10,15,40,.9);
+  border-radius:20px;
+  padding:22px;
+  display:flex;
+  gap:14px;
+  border:1px solid rgba(0,245,255,.35);
+  box-shadow:
+    0 0 25px rgba(0,245,255,.4),
+    inset 0 0 15px rgba(176,38,255,.25);
+  backdrop-filter:blur(12px);
+  transition:.4s ease;
+}
+
+.testimonial:hover{
+  transform:translateY(-6px) scale(1.04);
+  box-shadow:
+    0 0 40px rgba(0,245,255,.7),
+    inset 0 0 25px rgba(176,38,255,.5);
+}
+
+.testimonial img{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  border:2px solid var(--neon);
+  box-shadow:0 0 12px var(--neon);
+}
+
+/* Ultra smooth cinematic fade edges */
+.reviews-wrapper::before,
+.reviews-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  width:200px;         
+  height:100%;
+  z-index:2;           /* BELOW cards, ABOVE background */
+  pointer-events:none;
+}
+/* ================= CONTACT FORM – MOBILE FIX ================= */
+@media(max-width:768px){
+
+  .contact-wrapper{
+    grid-template-columns:1fr !important;
+    gap:30px;
+  }
+
+  .contact-info,
+  .contact-form-box{
+    padding:22px !important;
+    border-radius:20px;
+  }
+
+  .contact-info h2{
+    font-size:18px;
+  }
+
+  .contact-info p{
+    font-size:13px;
+    line-height:1.4;
+  }
+
+  .contact-badges span{
+    font-size:10px;
+    padding:5px 10px;
+  }
+
+  /* Inputs */
+  .input-group{
+    margin-bottom:16px;
+  }
+
+  .input-group input,
+  .input-group textarea{
+    padding:10px 10px;
+    font-size:13px;
+    border-radius:8px;
+  }
+
+  .input-group label{
+    font-size:11px;
+  }
+
+  /* Send Button */
+  .send-btn{
+    font-size:15px;
+    padding:12px;
+    border-radius:30px;
+  }
+
+  /* Section spacing */
+  .contact-section{
+    padding:70px 6% !important;
+  }
+
+  /* Titles */
+  #contact .title h3{
+    font-size:26px;
+  }
+
+  .contact-sub{
+    font-size:13px;
+  }
+
+}
+
+/* Left side fade */
+.reviews-wrapper::before{
+  left:0;
+  width:300px;
+  background:linear-gradient(
+    to right,
+    rgba(6,14,73,0.95) 0%,
+    rgba(6,14,73,0.85) 18%,
+    rgba(6,14,73,0.72) 33%,
+    rgba(6,14,73,0.55) 48%,
+    rgba(6,14,73,0.36) 64%,
+    rgba(6,14,73,0.18) 82%,
+    rgba(6,14,73,0.06) 92%,
+    transparent 100%
+  );
+  backdrop-filter:blur(12px);
+  filter:blur(10px);
+  opacity:0.92;
+}
+
+/* Right side fade */
+.reviews-wrapper::after{
+  right:0;
+  width:300px;
+  background:linear-gradient(
+    to left,
+    rgba(6,14,73,0.95) 0%,
+    rgba(6,14,73,0.85) 18%,
+    rgba(6,14,73,0.72) 33%,
+    rgba(6,14,73,0.55) 48%,
+    rgba(6,14,73,0.36) 64%,
+    rgba(6,14,73,0.18) 82%,
+    rgba(6,14,73,0.06) 92%,
+    transparent 100%
+  );
+  backdrop-filter:blur(12px);
+  filter:blur(10px);
+  opacity:0.92;
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .testimonial{
+    min-width:280px;
+    max-width:280px;
+  }
+}
+</style>
+<style>
+/* Final overrides to prevent squeezing: ensure desired sizes override earlier rules */
+.stats-orbit::-webkit-scrollbar{ display:none; }
+.orb-stat{ flex:0 0 auto !important; width:260px !important; height:260px !important; }
+.orb-stat svg{ width:260px !important; height:260px !important; }
+.orb-content{ width:240px !important; height:240px !important; }
+
+@media (max-width: 900px){
+  .orb-stat{ width:180px !important; height:180px !important; }
+  .orb-stat svg{ width:180px !important; height:180px !important; }
+  .orb-content{ width:170px !important; height:170px !important; }
+}
+
+@media (max-width:768px){
+  .orb-stat{ width:220px !important; height:220px !important; }
+  .orb-stat svg{ width:220px !important; height:220px !important; }
+  .orb-content{ width:200px !important; height:200px !important; }
+}
+</style>
+
+<style>
+/* Realistic orb appearance + continuous scrolling */
+.orb-content{
+  background:
+    radial-gradient(circle at 25% 20%, rgba(255,255,255,0.14), transparent 12%),
+    radial-gradient(circle at 75% 80%, rgba(255,255,255,0.05), transparent 25%),
+    linear-gradient(135deg, rgba(80,140,255,0.95), rgba(54,17,138,0.98));
+  border:1px solid rgba(255,255,255,0.06) !important;
+  box-shadow:
+    0 18px 40px rgba(8,12,35,0.6),
+    inset 0 8px 20px rgba(255,255,255,0.03);
+  position:relative;
+  overflow:hidden;
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+.orb-content::before{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02));
+  mix-blend-mode:screen;opacity:.32;pointer-events:none;transform:skewY(-6deg) translateY(-18%);
+}
+.orb-content::after{
+  content:"";
+  position:absolute;width:60%;height:30%;top:6%;left:8%;
+  background:rgba(255,255,255,0.28);filter:blur(18px);opacity:.75;pointer-events:none;transform:rotate(-18deg);
+}
+.orb-stat:hover .orb-content{ transform:translateY(-6px) scale(1.02); box-shadow:0 26px 60px rgba(8,12,35,0.7); }
+
+.orb-stat circle{ stroke:rgba(255,255,255,0.18) !important; stroke-width:4 !important; filter:drop-shadow(0 8px 18px rgba(0,0,0,0.45)); }
+
+/* Force continuous scrolling like reviews on all widths */
+.stats-track{ animation:scrollStats 26s linear infinite; }
+.stats-track:hover{ animation-play-state:paused; }
+
+/* Slightly slower on large screens */
+@media(min-width:1200px){ .stats-track{ animation-duration:34s; } }
 
 </style>
+<style>
+/* Desktop: force horizontal stats layout and larger orbs (override mobile rules) */
+@media (min-width: 901px){
+  /* make the outer container the horizontal scroller, inner track stay wide */
+  .stats-orbit{
+    display:block !important;
+    width:100% !important;
+    overflow:hidden !important; /* hide native scroll, use auto animation */
+    padding:8px 0 !important;
+    position:relative !important;
+  }
+  .stats-wrapper{ width:100% !important; }
+  .stats-track{
+    display:flex !important;
+    gap:60px !important;
+    width:max-content !important;
+    align-items:center !important;
+    white-space:nowrap !important;
+  }
+  /* enable auto-scroll on desktop too */
+  .stats-track{ animation:scrollStats 28s linear infinite; }
+  .stats-track:hover{ animation-play-state:paused; }
+  /* hide native scrollbar on desktop (no fade masks) */
+  .stats-orbit::-webkit-scrollbar{ display:none; }
+  .orb-stat{
+    flex:0 0 auto !important;
+    width:260px !important;
+    height:260px !important;
+    margin:0 10px !important;
+    animation:orbFloat 6s ease-in-out infinite alternate !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+  }
+  .orb-content{
+    width:240px !important;
+    height:240px !important;
+    position:relative !important;
+    padding:14px !important;
+    box-shadow:0 0 12px rgba(0,0,0,0.25) !important;
+    background:linear-gradient(135deg, rgba(80,140,255,0.85), rgba(54,17,138,0.95)) !important;
+  }
+  .orb-content h2{ font-size:48px !important; }
+  .orb-stat svg{
+    position:absolute !important;
+    width:260px !important;
+    height:260px !important;
+    transform:rotate(-90deg) !important;
+  }
+}
+</style>
+
+<style>
+/* Enforce perfect circular orbs across breakpoints */
+:root{
+  --orb-desktop:260px;
+  --orb-tablet:180px;
+  --orb-mobile:220px;
+}
+.orb-stat, .orb-content, .orb-stat svg{
+  box-sizing:border-box !important;
+  border-radius:50% !important;
+  width:var(--orb-desktop) !important;
+  height:var(--orb-desktop) !important;
+  min-width:0 !important;
+}
+@media (max-width:900px){
+  .orb-stat, .orb-content, .orb-stat svg{
+    width:var(--orb-tablet) !important;
+    height:var(--orb-tablet) !important;
+  }
+}
+@media (max-width:768px){
+  .orb-stat, .orb-content, .orb-stat svg{
+    width:var(--orb-mobile) !important;
+    height:var(--orb-mobile) !important;
+  }
+}
+</style>
 </head>
+
+<style>
+/* Strong final fix: make orb containers relative and inner content scale uniformly */
+.orb-stat{
+  position:relative !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 !important;
+}
+.orb-content{
+  position:relative !important;
+  inset:auto !important;
+  top:auto !important;left:auto !important;
+  transform:none !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:hidden !important;
+  border-radius:50% !important;
+}
+.orb-stat svg{ position:absolute !important; top:0; left:0; }
+</style>
 <body>
 
 
@@ -1280,10 +2008,7 @@ body{
 
 <div class="cursor"></div>
 
-<!-- MODAL -->
-<div class="modal-bg" id="modalBg">
-  <div class="modal" id="modalContent"></div>
-</div>
+
 
 <header>
   <h1>Dizitise</h1>
@@ -1300,16 +2025,19 @@ body{
 <section class="hero">
   <div class="hero-grid">
     <div class="hero-left glide-left">
+       
       <h2>
   India’s <span id="typing-word"></span><br>
   Futuristic Digital Institute
 </h2>
 
       <p>Master Video Editing, Graphic Design, Web Development & AI with real mentors.</p>
-      <div class="hero-actions">
-        <a class="cta">Join Now</a>
-        <a class="cta secondary">Visit Campus</a>
-      </div>
+<div class="hero-actions">
+  <a href="#contact" class="cta">Join Now</a>
+  <a href="#map" class="cta secondary">Visit Campus</a>
+</div>
+
+       
     </div>
 
    <div class="hero-right">
@@ -1337,238 +2065,210 @@ body{
   </div>
 
   <div class="stats-orbit">
+  <!-- Scrolling track: duplicated items for seamless loop (mobile swipe friendly) -->
+  <div class="stats-wrapper">
+    <div class="stats-track">
 
-    <div class="orb-stat" data-target="500">
-      <svg viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r="52" />
-      </svg>
-      <div class="orb-content">
-        <span></span>
-        <h2>70+</h2>
-        <p>Students</p>
+      <div class="orb-stat" data-target="500">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" />
+        </svg>
+        <div class="orb-content">
+          <span></span>
+          <h2>70+</h2>
+          <p>Students</p>
+        </div>
       </div>
-    </div>
 
-    <div class="orb-stat purple" data-target="95">
-      <svg viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r="52" />
-      </svg>
-      <div class="orb-content">
-        <span>🔥</span>
-        <h2>95%</h2>
-        <p>Success</p>
+      <div class="orb-stat purple" data-target="95">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" />
+        </svg>
+        <div class="orb-content">
+          <span>🔥</span>
+          <h2>95%</h2>
+          <p>Success</p>
+        </div>
       </div>
-    </div>
 
-    <div class="orb-stat cyan" data-target="100">
-      <svg viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r="52" />
-      </svg>
-      <div class="orb-content">
-        <span></span>
-        <h2>150+</h2>
-        <p>Projects</p>
+      <div class="orb-stat cyan" data-target="100">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" />
+        </svg>
+        <div class="orb-content">
+          <span></span>
+          <h2>150+</h2>
+          <p>Projects</p>
+        </div>
       </div>
-    </div>
 
-    <div class="orb-stat green" data-target="4">
-      <svg viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r="52" />
-      </svg>
-      <div class="orb-content">
-        <span></span>
-        <h2>4+</h2>
-        <p>Core Skills</p>
+      <div class="orb-stat green" data-target="4">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" />
+        </svg>
+        <div class="orb-content">
+          <span></span>
+          <h2>4+</h2>
+          <p>Core Skills</p>
+        </div>
       </div>
-    </div>
 
+      
+
+    </div>
   </div>
 </section>
 
 <!-- COURSES -->
+<section id="team">
+  <div class="title"><h3>Our Core Team</h3></div>
+
+  <div class="grid mentors-grid">
+
+    <!-- TEAM MEMBER 1 -->
+    <a href="jivesh.html" class="mentor-card">
+      <div class="mentor-float"></div>
+      <div class="mentor-glow"></div>
+      <div class="mentor-content">
+        <img src="IMG_20251120_224003_312.webp">
+        <h4>Jivesh Dahiya</h4>
+        <p>Founder & Creative Director</p>
+        <div class="chips">
+          <span>Video Editing</span>
+          <span>Branding</span>
+          <span>Leadership</span>
+        </div>
+        <div class="stars">★★★★★</div>
+        <div class="btn">View Profile →</div>
+      </div>
+    </a>
+
+    <!-- TEAM MEMBER 2 -->
+    <a href="pankaj.html" class="mentor-card">
+      <div class="mentor-float"></div>
+      <div class="mentor-glow purple"></div>
+      <div class="mentor-content">
+        <img src="WhatsApp Image 2026-01-20 at 3.11.58 PM.jpeg">
+        <h4>Pankaj Pratap</h4>
+        <p>Lead Developer</p>
+        <div class="chips">
+          <span>Full Stack</span>
+          <span>System Design</span>
+          <span>Startups</span>
+        </div>
+        <div class="stars">★★★★★</div>
+        <div class="btn">View Profile →</div>
+      </div>
+    </a>
+
+    <!-- TEAM MEMBER 3 -->
+    <a href="mehar.html" class="mentor-card">
+      <div class="mentor-float"></div>
+      <div class="mentor-glow green"></div>
+      <div class="mentor-content">
+        <img src="https://i.pravatar.cc/200?33">
+        <h4>Mehar Malik</h4>
+        <p>AI & Automation Mentor</p>
+        <div class="chips">
+          <span>AI</span>
+          <span>Automation</span>
+          <span>ChatGPT</span>
+        </div>
+        <div class="stars">★★★★☆</div>
+        <div class="btn">View Profile →</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+
+
 <section id="courses">
   <div class="title"><h3>Our Courses</h3></div>
 
   <div class="grid courses-grid">
 
-    <div class="course-card neon-blue">
+    <!-- VIDEO EDITING -->
+    <a href="editing.html" class="course-card blue">
       <div class="course-glow"></div>
       <div class="course-content">
-        <span class="course-icon">🎬</span>
-        <h3>Video Editing</h3>
-        <p>Reels • YouTube • Cinematic Films • Freelancing</p>
-        <ul>
-          <li>Premiere Pro + After Effects</li>
-          <li>Client Handling</li>
-          <li>Portfolio Building</li>
-        </ul>
-        <button class="btn" onclick="openModal('Video Editing','Master cinematic editing, YouTube workflows, client projects, monetization, freelancing & portfolio building.')">
-          Explore Program →
-        </button>
-      </div>
-    </div>
-
-    <div class="course-card neon-purple">
-      <div class="course-glow"></div>
-      <div class="course-content">
-        <span class="course-icon">🎨</span>
-        <h3>Graphic Design</h3>
-        <p>Branding • UI • Social Media • Thumbnails</p>
-        <ul>
-          <li>Photoshop + Illustrator</li>
-          <li>Brand Identity Design</li>
-          <li>Real Client Projects</li>
-        </ul>
-        <button class="btn" onclick="openModal('Graphic Design','Learn branding, UI design, social media creatives, client projects & portfolio development.')">
-          Explore Program →
-        </button>
-      </div>
-    </div>
-
-    <div class="course-card neon-cyan">
-      <div class="course-glow"></div>
-      <div class="course-content">
-        <span class="course-icon">💻</span>
-        <h3>Web Development</h3>
-        <p>Frontend • Hosting • Live Projects • Freelancing</p>
-        <ul>
-          <li>HTML, CSS, JavaScript</li>
-          <li>Deploy Real Websites</li>
-          <li>Freelancing & Agency Skills</li>
-        </ul>
-        <button class="btn" onclick="openModal('Web Development','Frontend development, live hosting, freelancing, agency workflows & client projects.')">
-          Explore Program →
-        </button>
-      </div>
-    </div>
-
-    <div class="course-card neon-ai">
-      <div class="course-glow"></div>
-      <div class="course-content">
-        <span class="course-icon">🤖</span>
-        <h3>Artificial Intelligence</h3>
-        <p>Automation • ChatGPT • Productivity Systems</p>
-        <ul>
-          <li>AI Workflows</li>
-          <li>Automation Tools</li>
-          <li>Future-Proof Skills</li>
-        </ul>
-        <button class="btn" onclick="openModal('Artificial Intelligence','Learn ChatGPT, automation tools, AI workflows & future business systems.')">
-          Explore Program →
-        </button>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- MENTORS -->
-<!-- ================= MENTORS SECTION ================= -->
-<section id="mentors">
-  <div class="title"><h3>Our Mentors</h3></div>
-
-  <div class="grid mentors-grid">
-
-    <!-- Mentor 1 -->
-    <div class="mentor-card"
-      onclick="openModal(
-        'Jivesh Dahiya',
-        '10+ years of creative leadership. Built multiple agencies. Mentored 500+ designers and branding professionals.',
-        'https://i.pravatar.cc/400?1',
-        'Creative Director',
-        ['Branding','UI/UX','Agencies','Leadership','Design Thinking']
-      )">
-      <div class="mentor-glow"></div>
-      <div class="mentor-content">
-        <img src="https://i.pravatar.cc/200?1">
-        <h4>Jivesh Dahiya</h4>
-        <p>Creative Director</p>
-        <div class="chips">
-          <span>Video Editing</span>
-          <span>Web Design</span>
-          <span>Graphic Design</span>
+        <img src="video-editing.png">
+        <h4>Video Editing</h4>
+        <p>Professional Editor Track</p>
+        <div class="course-tags">
+          <span>Premiere Pro</span>
+          <span>After Effects</span>
+          <span>Reels</span>
         </div>
-        <div class="stars">★★★★★</div>
-        <div class="btn">View Profile</div>
-      </div>
-    </div>
-
-    <!-- Mentor 2 -->
-    <div class="mentor-card"
-      onclick="openModal(
-        'Pankaj Pratap',
-        'Full-stack engineer. Built 20+ SaaS products. Startup technical consultant and mentor for developers.',
-        'https://i.pravatar.cc/400?2',
-        'Lead Developer',
-        ['Full-Stack','SaaS','System Design','Startups','Mentorship']
-      )">
-      <div class="mentor-glow purple"></div>
-      <div class="mentor-content">
-        <img src="https://i.pravatar.cc/200?2">
-        <h4>Pankaj Pratap</h4>
-        <p>Lead Developer</p>
-        <div class="chips">
-          <span>Full-Stack</span>
-          <span>SaaS</span>
-          <span>Startups</span>
+        <div class="course-footer">
+          <span>★★★★★</span>
+          <span class="open">Explore →</span>
         </div>
-        <div class="stars">★★★★★</div>
-        <div class="btn">View Profile</div>
       </div>
-    </div>
+    </a>
 
-    <!-- Mentor 3 -->
-    <div class="mentor-card"
-      onclick="openModal(
-        'Mehar Malik',
-        'AI automation expert. ChatGPT workflows specialist. Helps businesses scale using AI systems.',
-        'https://i.pravatar.cc/400?3',
-        'AI Mentor',
-        ['AI Automation','ChatGPT','Productivity','Workflow Systems','Business AI']
-      )">
-      <div class="mentor-glow green"></div>
-      <div class="mentor-content">
-        <img src="https://i.pravatar.cc/200?3">
-        <h4>Mehar Malik</h4>
-        <p>AI Mentor</p>
-        <div class="chips">
+    <!-- GRAPHIC DESIGN -->
+    <a href="graphic.html" class="course-card purple">
+      <div class="course-glow"></div>
+      <div class="course-content">
+        <img src="graphic-designer.png">
+        <h4>Graphic Design</h4>
+        <p>Branding & Creative Track</p>
+        <div class="course-tags">
+          <span>Photoshop</span>
+          <span>Illustrator</span>
+          <span>Branding</span>
+        </div>
+        <div class="course-footer">
+          <span>★★★★★</span>
+          <span class="open">Explore →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- WEB DEV -->
+    <a href="development.html" class="course-card green">
+      <div class="course-glow"></div>
+      <div class="course-content">
+        <img src="web.png">
+        <h4>Web Development</h4>
+        <p>Frontend & Freelancing</p>
+        <div class="course-tags">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JS</span>
+        </div>
+        <div class="course-footer">
+          <span>★★★★★</span>
+          <span class="open">Explore →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- AI -->
+    <a href="ai.html" class="course-card cyan">
+      <div class="course-glow"></div>
+      <div class="course-content">
+        <img src="ai.png">
+        <h4>Artificial Intelligence</h4>
+        <p>AI & Automation Track</p>
+        <div class="course-tags">
           <span>AI</span>
           <span>Automation</span>
-          <span>Business</span>
+          <span>ChatGPT</span>
         </div>
-        <div class="stars">★★★★☆</div>
-        <div class="btn">View Profile</div>
+        <div class="course-footer">
+          <span>★★★★☆</span>
+          <span class="open">Explore →</span>
+        </div>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>
 
 
-<!-- ================= FUTURISTIC PROFILE MODAL ================= -->
-<div class="modal-bg" id="modalBg">
-  <div class="profile-modal">
-
-    <div class="modal-left">
-      <img id="modalImg" src="">
-      <div class="modal-badge">MENTOR PROFILE</div>
-    </div>
-
-    <div class="modal-right">
-      <h2 id="modalName"></h2>
-      <h4 id="modalRole"></h4>
-      <div class="modal-stars">★★★★★</div>
-
-      <div class="modal-bio" id="modalBio"></div>
-
-      <div class="modal-skills" id="modalSkills"></div>
-
-      <button class="modal-close" onclick="closeModal()">Close Profile</button>
-    </div>
-
-  </div>
-</div>
 
 <section id="reviews">
   <div class="title">
@@ -1648,7 +2348,7 @@ body{
 
   <div class="map-box">
     <iframe 
-      src="https://www.google.com/maps?q=28.6139,77.2090&z=15&output=embed"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d425.158038398073!2d76.61438076767512!3d28.88426959703522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d84e1ce3c098f%3A0xcb4129618add7bc5!2s424%2F30%2C%20Main%20Street%2C%20near%20CSD%20Canteen%2C%20Dev%20Colony%2C%20Rohtak%2C%20Haryana%20124001!5e1!3m2!1sen!2sin!4v1768826194726!5m2!1sen!2sin"
       width="100%" 
       height="420" 
       style="border:0;" 
@@ -1666,78 +2366,121 @@ body{
     <p class="contact-sub">One click can start your digital journey.</p>
   </div>
 
-  <!-- Quick Action Bar -->
-  <div class="quick-actions">
-    <a href="tel:+919XXXXXXXXX" class="qa-btn call">📞 Call</a>
-  </div>
-  <div class="quick-actions"></div>
- <a href="https://instagram.com/your_instagram" target="_blank" class="qa-btn insta">📸 Instagram</a>
-  </section>div>
- <div class="contact-wrapper">
+  <!-- WRAPPER (THIS MAKES THEM SIDE BY SIDE) -->
+  <div class="contact-wrapper">
 
-    <!-- Info Panel -->
+    <!-- INFO PANEL -->
     <div class="contact-info">
       <h2>📍 Visit Our Campus</h2>
-      <p>Your Institute Address, City, India</p>
+      <p>424/30,Main Street,Near CSD Canteen,Dev Colony,Rohtak</p>
 
       <h2>📞 Phone</h2>
-      <p>+91 9XXXXXXXXX</p>
+      <p>+91 99918 41977,+91 93066 71088</p>
+      <p>+91 99910 18621,+91 93069 01293</p>
 
       <h2>📧 Email</h2>
-      <p>info@dizitise.com</p>
+      <p>corptubeprivate@gmail.com</p>
 
       <div class="contact-badges">
         <span>Offline Classes</span>
-        <span>Real Mentors</span>
+        <span>Real Projects</span>
         <span>Career Support</span>
-      </div>'<div class="quick-actions">
-    <a href="tel:+919XXXXXXXXX" class="qa-btn call">📞 Call</a>
-    
+        <span>Experienced Faculty</span>
+       
+      </div>
 
-  </div>
-    </div>
-
-    <!-- Form Panel -->
-    <div class="contact-form-box">
-      <h2>Send Us a Message</h2>
-      <form class="contact-form" onsubmit="submitContact(event)">
-        
-        <div class="input-group">
-          <input type="text" required>
-          <label>Your Name</label>
-        </div>
-
-        <div class="input-group">
-          <input type="tel" required>
-          <label>Phone Number</label>
-        </div>
-
-        <div class="input-group">
-          <input type="email" required>
-          <label>Email Address</label>
-        </div>
-
-        <div class="input-group">
-          <textarea rows="4" required></textarea>
-          <label>Your Message</label>
-        </div>
-
-        <button type="submit"  class="send-btn"> 
-          🚀 Send Message
-          <span class="btn-glow"></span>
-        </button>
-
-      </form>
-
-      <div class="success-message" id="successMsg">
-        ✨ Message Sent! We’ll contact you shortly.
+      <div class="quick-actions">
+        <a href="tel:+919XXXXXXXXX" class="qa-btn call">📞 Call</a>
+      </div>
+       <div class="quick-actions">
+        <a href="https://instagram.com/your_instagram" target="_blank" class="qa-btn insta">📸 Instagram</a>
       </div>
     </div>
+ 
+    <!-- FORM PANEL -->
+<div class="contact-form-box">
+  <h2>Send Us a Message</h2>
 
+  <form class="contact-form" onsubmit="submitContact(event)">
+    <div class="input-group">
+      <input type="text" id="name" required>
+      <label>Your Name</label>
+    </div>
+
+    <div class="input-group">
+      <input type="tel" id="phone" required>
+      <label>Phone Number</label>
+    </div>
+
+    <div class="input-group">
+      <input type="email" id="email" required>
+      <label>Email Address</label>
+    </div>
+
+    <div class="input-group">
+      <textarea id="message" rows="4" required></textarea>
+      <label>Your Message</label>
+    </div>
+
+    <button type="submit" class="send-btn">
+      🚀 Send Message
+    </button>
+  </form>
+
+  <div class="success-message" id="successMsg">
+    ✨ Message Sent! We’ll contact you shortly.
   </div>
-</section>
+</div>
 
 
+
+
+<script>
+async function submitContact(e){
+  e.preventDefault();
+
+  const data = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    email: document.getElementById("email").value,
+    message: document.getElementById("message").value
+  };
+
+  try {
+    const res = await fetch("http://localhost:3001/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    const msg = document.getElementById("successMsg");
+    msg.style.display = "block";
+
+    if(result.success){
+      msg.innerHTML = "✨ Message Sent! We’ll contact you shortly.";
+      msg.style.background = "rgba(0,255,150,.15)";
+      msg.style.border = "1px solid #00ff99";
+      e.target.reset();
+    } else {
+      msg.innerHTML = "❌ Failed to send message. Try again.";
+      msg.style.background = "rgba(255,0,0,.15)";
+      msg.style.border = "1px solid red";
+    }
+
+    setTimeout(() => {
+      msg.style.display = "none";
+    }, 4000);
+
+  } catch (err) {
+    console.error(err);
+    alert("Server error. Is your backend running?");
+  }
+}
+</script>
 
 
 <script>
@@ -1752,25 +2495,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ================= MODAL ================= */
-  window.openModal = function(title, content){
-    const bg = document.getElementById('modalBg');
-    const modal = document.getElementById('modalContent');
-    if(bg && modal){
-      bg.style.display = "flex";
-      modal.innerHTML = `
-        <h3>${title}</h3>
-        <p style="margin-top:15px">${content}</p>
-        <button onclick="closeModal()">Close</button>
-      `;
-    }
-  }
-
-  window.closeModal = function(){
-    const bg = document.getElementById('modalBg');
-    if(bg) bg.style.display = "none";
-  }
-
+  
   /* ================= STATS COUNTER ================= */
   const counters = document.querySelectorAll('.stat h2');
   let started = false;
@@ -1847,44 +2572,294 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ================= MENTOR 3D TILT EFFECT ================= */
-  const mentorCards = document.querySelectorAll(".mentor-card");
+  /* ================= TRUE 3D TILT (DESKTOP) ================= */
+const mentorCards = document.querySelectorAll(".mentor-card");
 
-  mentorCards.forEach(card => {
-    card.addEventListener("mousemove", e => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top  - rect.height / 2;
+mentorCards.forEach(card => {
+  let bounds = null;
 
-      const rotateX = (-y / 20);
-      const rotateY = (x / 20);
-
-      card.style.transform = `
-        rotateX(${rotateX}deg)
-        rotateY(${rotateY}deg)
-        scale(1.05)
-      `;
-    });
-
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
-    });
+  card.addEventListener("mouseenter", () => {
+    bounds = card.getBoundingClientRect();
   });
 
+  card.addEventListener("mousemove", e => {
+    const x = e.clientX - bounds.left;
+    const y = e.clientY - bounds.top;
+
+    const centerX = bounds.width / 2;
+    const centerY = bounds.height / 2;
+
+    const percentX = (x - centerX) / centerX;
+    const percentY = (y - centerY) / centerY;
+
+    const rotateX = percentY * -18;
+    const rotateY = percentX * 18;
+
+    card.style.transform = `
+      rotateX(${rotateX}deg)
+      rotateY(${rotateY}deg)
+      scale(1.06)
+    `;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = `
+      rotateX(0deg)
+      rotateY(0deg)
+      scale(1)
+    `;
+  });});
+
+  /* ================= HERO TILES RANDOMIZER ================= */
+  const heroRight = document.querySelector('.hero-right');
+  if(heroRight){
+    const items = Array.from(heroRight.children);
+    // Fisher-Yates shuffle
+    for(let i = items.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    // Append in shuffled order and add small random animation delays
+    items.forEach((el, idx) => {
+      el.style.animationDelay = (Math.random() * 0.6).toFixed(2) + 's';
+      heroRight.appendChild(el);
+    });
+  }
+
+  /* ================= STATS SWIPE (touch) - pause auto-scroll while dragging ================= */
+  const statsWrapper = document.querySelector('.stats-wrapper');
+  const statsTrack = document.querySelector('.stats-track');
+  if(statsWrapper && statsTrack){
+    let touching = false;
+    statsWrapper.addEventListener('touchstart', (e) => {
+      touching = true;
+      statsTrack.style.animationPlayState = 'paused';
+      statsWrapper.style.overflowX = 'auto';
+    }, {passive:true});
+
+    statsWrapper.addEventListener('touchend', () => {
+      touching = false;
+      statsWrapper.style.overflowX = 'hidden';
+      statsTrack.style.animationPlayState = 'running';
+    });
+
+    statsWrapper.addEventListener('pointerdown', () => {
+      statsTrack.style.animationPlayState = 'paused';
+      statsWrapper.style.overflowX = 'auto';
+    });
+    statsWrapper.addEventListener('pointerup', () => {
+      statsWrapper.style.overflowX = 'hidden';
+      statsTrack.style.animationPlayState = 'running';
+    });
+  }
+
 });
-function submitContact(e){
-  e.preventDefault();
 
-  const msg = document.getElementById("successMsg");
-  msg.style.display = "block";
-
-  setTimeout(()=>{
-    msg.style.display = "none";
-  },4000);
-
-  e.target.reset();
-}
 
 </script>
+</script>
+
+<!-- Mobile-only 3D styles + lightweight enhanced scene -->
+<style>
+#mobile-3d{ display:none; }
+
+@media(max-width:768px){
+  #mobile-3d{
+    display:block;
+    width:100%;
+    height:360px;
+    margin:25px auto 0;
+    position:relative;
+    overflow:visible;
+
+    /* REMOVE BOX FEEL */
+    background:none;
+    box-shadow:none;
+    border-radius:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  #mobile-3d canvas{
+    width:100% !important;
+    height:100% !important;
+    display:block;
+    filter:
+      drop-shadow(0 0 20px rgba(4, 0, 255, 0.6))
+      drop-shadow(0 0 40px rgba(176,38,255,.4));
+  }
+}
+
+  
+
+  /* Glass shine */
+  #mobile-3d::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:26px;
+    background:
+      linear-gradient(120deg,
+        rgba(44, 16, 207, 0.25) 0%,
+        rgba(255,255,255,.08) 25%,
+        transparent 50%);
+    mix-blend-mode:overlay;
+    pointer-events:none;
+  }
+
+  
+</style>
+
+
+<script>
+(function(){
+  if(window.innerWidth > 768) return;
+
+  function load(src,cb){
+    const s=document.createElement("script");
+    s.src=src; s.onload=cb;
+    document.head.appendChild(s);
+  }
+
+  load("https://unpkg.com/three@0.158.0/build/three.min.js", ()=>{
+
+    const box = document.getElementById("mobile-3d");
+    if(!box) return;
+
+    const w = box.clientWidth, h = box.clientHeight;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, w/h, 0.1, 100);
+    camera.position.z = 4;
+
+    const renderer = new THREE.WebGLRenderer({alpha:true, antialias:true});
+    renderer.setSize(w,h);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5));
+    box.appendChild(renderer.domElement);
+
+    /* LIGHTING (soft, only for glow effect) */
+    scene.add(new THREE.AmbientLight(0xffffff,0.4));
+
+    const neonLight = new THREE.PointLight(0x00f5ff,1.2,10);
+    neonLight.position.set(2,2,2);
+    scene.add(neonLight);
+
+    const purpleLight = new THREE.PointLight(0xb026ff,1.1,10);
+    purpleLight.position.set(-2,-2,2);
+    scene.add(purpleLight);
+
+    /* ======================
+       WIRE NETWORK CORE
+       ====================== */
+
+    const points = [];
+    const count = 120;
+
+    for(let i=0;i<count;i++){
+      const theta = Math.random()*Math.PI*2;
+      const phi   = Math.acos((Math.random()*2)-1);
+      const r = 1.5 + Math.random()*0.4;
+
+      const x = r * Math.sin(phi) * Math.cos(theta);
+      const y = r * Math.sin(phi) * Math.sin(theta);
+      const z = r * Math.cos(phi);
+
+      points.push(new THREE.Vector3(x,y,z));
+    }
+
+    // Points
+    const pointGeo = new THREE.BufferGeometry().setFromPoints(points);
+    const pointMat = new THREE.PointsMaterial({
+      color:0x00f5ff,
+      size:0.04,
+      transparent:true,
+      opacity:0.9
+    });
+    const dots = new THREE.Points(pointGeo, pointMat);
+    scene.add(dots);
+
+    // Lines between close points
+    const linePositions = [];
+    for(let i=0;i<points.length;i++){
+      for(let j=i+1;j<points.length;j++){
+        const dist = points[i].distanceTo(points[j]);
+        if(dist < 0.55){
+          linePositions.push(
+            points[i].x,points[i].y,points[i].z,
+            points[j].x,points[j].y,points[j].z
+          );
+        }
+      }
+    }
+
+    const lineGeo = new THREE.BufferGeometry();
+    lineGeo.setAttribute("position",
+      new THREE.Float32BufferAttribute(linePositions,3)
+    );
+
+    const lineMat = new THREE.LineBasicMaterial({
+      color:0xb026ff,
+      transparent:true,
+      opacity:0.35
+    });
+
+    const network = new THREE.LineSegments(lineGeo,lineMat);
+    scene.add(network);
+
+    /* Outer rotating ring */
+    const ringGeo = new THREE.TorusGeometry(2.1,0.015,8,120);
+    const ringMat = new THREE.MeshBasicMaterial({
+      color:0x00f5ff,
+      transparent:true,
+      opacity:0.5
+    });
+    const ring = new THREE.Mesh(ringGeo,ringMat);
+    scene.add(ring);
+
+    /* Parallax */
+    let mx=0,my=0;
+    box.addEventListener("mousemove",e=>{
+      const r=box.getBoundingClientRect();
+      mx=(e.clientX-r.left)/r.width-.5;
+      my=(e.clientY-r.top)/r.height-.5;
+    });
+    box.addEventListener("touchmove",e=>{
+      const t=e.touches[0];
+      const r=box.getBoundingClientRect();
+      mx=(t.clientX-r.left)/r.width-.5;
+      my=(t.clientY-r.top)/r.height-.5;
+    },{passive:true});
+
+    function animate(){
+      const t = Date.now()*0.0006;
+
+      network.rotation.y = t;
+      network.rotation.x = t*0.7;
+      dots.rotation.copy(network.rotation);
+
+      ring.rotation.z -= 0.002;
+
+      network.rotation.y += mx*0.3;
+      network.rotation.x += my*0.3;
+
+      renderer.render(scene,camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener("resize",()=>{
+      const nw=box.clientWidth, nh=box.clientHeight;
+      camera.aspect=nw/nh;
+      camera.updateProjectionMatrix();
+      renderer.setSize(nw,nh);
+    });
+
+  });
+})();
+</script>
+
 
 
 </body>

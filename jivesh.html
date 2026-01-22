@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dizitise | Mentor Profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --neon:#00f5ff;
+  --purple:#b026ff;
+  --bg1:#04071c;
+  --bg2:#02040f;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+
+body{
+  background:
+    radial-gradient(900px 600px at 10% 10%, rgba(0,245,255,.18), transparent 60%),
+    radial-gradient(900px 600px at 90% 20%, rgba(176,38,255,.18), transparent 60%),
+    linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:white;
+  overflow-x:hidden;
+}
+
+/* Back Button */
+.back-btn{
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:999;
+  padding:10px 18px;
+  border-radius:30px;
+  background:rgba(10,15,40,.8);
+  border:1px solid var(--neon);
+  color:var(--neon);
+  text-decoration:none;
+  font-weight:600;
+  backdrop-filter:blur(12px);
+  box-shadow:0 0 15px rgba(0,245,255,.6);
+}
+.back-btn:hover{
+  background:linear-gradient(135deg,var(--neon),var(--purple));
+  color:black;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1600px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* 3D Energy Rings */
+.ring{
+  position:absolute;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  border:2px solid rgba(0,245,255,.35);
+  animation:spin 20s linear infinite;
+}
+.ring.purple{
+  width:650px;
+  height:650px;
+  border-color:rgba(176,38,255,.25);
+  animation-duration:30s;
+}
+
+@keyframes spin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+/* Core Glow */
+.core{
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,var(--neon),transparent 70%),
+    radial-gradient(circle,var(--purple),transparent 70%);
+  filter:blur(40px);
+  animation:pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulse{
+  from{transform:scale(.9);}
+  to{transform:scale(1.15);}
+}
+
+/* Mentor Card */
+.mentor-card{
+  position:relative;
+  z-index:5;
+  background:
+  linear-gradient(
+    145deg,
+    rgba(8, 6, 133, 0.95),
+    rgba(40, 20, 120, 0.95)
+  ),
+  radial-gradient(
+    circle at top left,
+    rgba(76, 22, 177, 0.35),
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at bottom right,
+    rgba(199, 191, 204, 0.35),
+    transparent 55%
+  );
+
+  border-radius:30px;
+  padding:40px;
+  max-width:500px;
+  text-align:center;
+  border:1px solid rgba(0,245,255,.4);
+  backdrop-filter:blur(20px);
+  box-shadow:
+  0 0 30px rgba(0,245,255,.6),
+  0 0 80px rgba(176,38,255,.5),
+  inset 0 0 25px rgba(255,255,255,.08);
+
+  transform-style:preserve-3d;
+  transition:.4s ease;
+  will-change:transform;
+}
+
+.mentor-card:hover{
+  transform:rotateX(8deg) rotateY(-8deg) scale(1.05);
+}
+
+/* Avatar */
+.mentor-card img{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  border:4px solid var(--neon);
+  box-shadow:
+    0 0 25px var(--neon),
+    0 0 60px rgba(0,245,255,.8);
+  margin-bottom:20px;
+}
+
+/* Ensure avatar follows the card transform and has smooth depth pop */
+.mentor-card img{
+  will-change: transform;
+  transform-style:preserve-3d;
+  transition: transform 160ms ease-out;
+}
+
+.mentor-card h1{
+  font-size:30px;
+  color:var(--neon);
+  text-shadow:0 0 15px var(--neon);
+}
+
+.mentor-card h3{
+  font-size:15px;
+  opacity:.9;
+  margin-bottom:15px;
+}
+
+.mentor-card p{
+  font-size:16px;
+  opacity:.85;
+  line-height:1.6;
+}
+
+/* Skills */
+.skills{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:20px 0;
+}
+.skills span{
+  padding:6px 16px;
+  font-size:12px;
+  border-radius:20px;
+  background:linear-gradient(135deg,rgba(0,245,255,.3),rgba(176,38,255,.3));
+  border:1px solid rgba(0,245,255,.5);
+  box-shadow:0 0 10px rgba(0,245,255,.6);
+}
+
+/* Buttons */
+.actions{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:12px 26px;
+  border-radius:30px;
+  background:linear-gradient(135deg,var(--neon),var(--purple));
+  color:black;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 0 20px rgba(0,245,255,.7);
+}
+.btn.secondary{
+  background:transparent;
+  border:2px solid var(--neon);
+  color:white;
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .mentor-card{
+    padding:25px;
+  }
+  .mentor-card h1{
+    font-size:22px;
+  }
+  .mentor-card p{
+    font-size:12px;
+  }
+  .ring{width:300px;height:300px;}
+  .ring.purple{width:400px;height:400px;}
+  .core{width:150px;height:150px;}
+}
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">← Back</a>
+
+<section class="hero">
+
+  <div class="ring"></div>
+  <div class="ring purple"></div>
+  <div class="core"></div>
+
+  <!-- Single Mentor Card -->
+  <div class="mentor-card">
+    <img src="IMG_20251120_224003_312.webp">
+    <h1>Jivesh Dahiya</h1>
+    <h3>Founder & Creative Director</h3>
+
+    <p>
+      Jivesh is the visionary behind Dizitise. With deep expertise in
+      video editing, branding, and digital creativity, he has trained
+      hundreds of students to turn skills into income.
+      His teaching focuses on real-world execution, not theory.
+    </p>
+
+    <div class="skills">
+      <span>Video Editing</span>
+      <span>Brand Strategy</span>
+      <span>Creative Direction</span>
+      <span>Leadership</span>
+      <span>Freelancing</span>
+    </div>
+
+    <div class="actions">
+      <a href="tel:+919991841977" class="btn">📞 Book a Call</a>
+      <a href="https://wa.me/919991841977" class="btn secondary">💬 WhatsApp</a>
+    </div>
+  </div>
+
+</section>
+
+<script>
+/* Enhanced 3D Parallax with smoothing + inertia */
+(function(){
+  const card = document.querySelector('.mentor-card');
+  if(!card) return;
+
+  const img = card.querySelector('img');
+  const strength = 28; // rotation strength (degrees)
+  const imgZ = 28; // px translateZ for avatar pop
+ 
+  let targetX = 0, targetY = 0;
+  let currentX = 0, currentY = 0;
+  const ease = 0.12;
+
+  function onMove(e){
+    const x = (e.clientX / window.innerWidth - 0.5) * 2; // -1..1
+    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+    targetX = ( -y ) * strength;
+    targetY = ( x ) * strength;
+  }
+
+  function onLeave(){
+    targetX = 0; targetY = 0;
+  }
+
+  function raf(){
+    currentX += (targetX - currentX) * ease;
+    currentY += (targetY - currentY) * ease;
+
+    // Apply rotation and slight scale
+    card.style.transform = `rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) scale(1.03)`;
+
+    // subtle depth pop only; keep avatar moving with the card (no independent XY offset)
+    if(img){
+      img.style.transform = `translateZ(${imgZ}px) scale(1.02)`;
+    }
+
+    requestAnimationFrame(raf);
+  }
+
+  // Attach listeners
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('touchmove', (ev)=>{
+    if(ev.touches && ev.touches[0]) onMove(ev.touches[0]);
+  }, {passive:true});
+  window.addEventListener('mouseleave', onLeave);
+  window.addEventListener('blur', onLeave);
+  card.addEventListener('mouseleave', onLeave);
+  card.addEventListener('touchend', onLeave);
+
+  // reset styles on load
+  card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  if(img) img.style.transform = 'translateZ(0px)';
+
+  raf();
+
+})();
+</script>
+
+</body>
+</html>
