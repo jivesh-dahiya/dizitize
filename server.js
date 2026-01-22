@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
@@ -35,7 +36,7 @@ app.post("/contact", async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: `"Dizitise Institute" <jiveshdahiya21@gmail.com>`,
+      from: `"Dizitise Institute" <a075a5001@smtp-brevo.com>`,
       to: "brainivo.enquire@gmail.com", // put YOUR email here where you want leads
       subject: "🚀 New Contact Form Submission - Dizitise",
       html: `
